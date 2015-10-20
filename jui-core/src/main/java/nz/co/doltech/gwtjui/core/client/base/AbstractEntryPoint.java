@@ -73,8 +73,12 @@ public abstract class AbstractEntryPoint<T extends AbstractEntryPoint> implement
 
     protected abstract DependencySet<T> setupDependencies();
 
-    protected void inject(TextResource resource, boolean removeTag) {
-        ScriptInjector.fromString(resource.getText())
+    protected void inject(TextResource resource, boolean removeTag, boolean sourceUrl) {
+        String text = resource.getText() +
+            (sourceUrl ? "//# sourceURL="+resource.getName()+".js" : "");
+
+        // Inject the script resource
+        ScriptInjector.fromString(text)
             .setWindow(ScriptInjector.TOP_WINDOW)
             .setRemoveTag(removeTag)
             .inject();

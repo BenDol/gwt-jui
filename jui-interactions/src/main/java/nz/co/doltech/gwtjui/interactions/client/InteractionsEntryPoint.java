@@ -39,7 +39,7 @@ public class InteractionsEntryPoint extends AbstractEntryPoint<InteractionsEntry
 
     @Override
     protected void load() {
-        inject(InteractionsClientBundle.INSTANCE.jqueryUi(), false);
+        inject(InteractionsClientBundle.INSTANCE.juiInteractions(), true, false);
     }
 
     @Override

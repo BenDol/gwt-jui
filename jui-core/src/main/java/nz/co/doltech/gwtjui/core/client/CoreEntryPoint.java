@@ -39,7 +39,7 @@ public class CoreEntryPoint extends AbstractEntryPoint<CoreEntryPoint> {
 
     @Override
     public void load() {
-        inject(CoreClientBundle.INSTANCE.jqueryUi(), false);
+        inject(CoreClientBundle.INSTANCE.juiCore(), true, false);
     }
 
     @Override

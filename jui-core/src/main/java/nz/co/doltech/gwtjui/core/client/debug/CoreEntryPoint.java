@@ -19,6 +19,6 @@ public class CoreEntryPoint extends nz.co.doltech.gwtjui.core.client.CoreEntryPo
 
     @Override
     public void load() {
-        inject(CoreClientBundle.INSTANCE.jqueryUiDebug(), false);
+        inject(CoreClientBundle.INSTANCE.juiCoreDebug(), false, true);
     }
 }

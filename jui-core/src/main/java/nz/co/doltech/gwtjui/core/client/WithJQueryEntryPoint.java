@@ -20,7 +20,7 @@ public class WithJQueryEntryPoint extends CoreEntryPoint {
     @Override
     public void load() {
         if(!isJQueryLoaded()) {
-            inject(WithJQueryClientBundle.INSTANCE.jquery(), false);
+            inject(WithJQueryClientBundle.INSTANCE.jquery(), true, false);
         }
         super.load();
     }

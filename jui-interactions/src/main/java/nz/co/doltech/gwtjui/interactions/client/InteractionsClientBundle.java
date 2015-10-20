@@ -26,5 +26,5 @@ public interface InteractionsClientBundle extends ClientBundle {
     InteractionsClientBundle INSTANCE = GWT.create(InteractionsClientBundle.class);
 
     @Source("resources/js/jui-interactions-1.11.4.min.cache.js")
-    TextResource jqueryUi();
+    TextResource juiInteractions();
 }

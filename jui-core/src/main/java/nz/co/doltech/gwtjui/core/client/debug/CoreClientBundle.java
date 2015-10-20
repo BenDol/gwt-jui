@@ -26,5 +26,5 @@ public interface CoreClientBundle extends ClientBundle {
   CoreClientBundle INSTANCE = GWT.create(CoreClientBundle.class);
 
   @Source("nz/co/doltech/gwtjui/core/client/resources/js/jui-core-1.11.4.cache.js")
-  TextResource jqueryUiDebug();
+  TextResource juiCoreDebug();
 }

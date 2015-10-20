@@ -19,6 +19,6 @@ public class InteractionsEntryPoint extends nz.co.doltech.gwtjui.interactions.cl
 
     @Override
     protected void load() {
-        inject(InteractionsClientBundle.INSTANCE.jqueryUiDebug(), false);
+        inject(InteractionsClientBundle.INSTANCE.juiInteractionsDebug(), false, true);
     }
 }

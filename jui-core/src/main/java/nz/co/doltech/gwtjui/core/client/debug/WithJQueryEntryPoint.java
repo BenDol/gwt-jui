@@ -20,7 +20,7 @@ public class WithJQueryEntryPoint extends CoreEntryPoint {
     @Override
     public void load() {
         if(!nz.co.doltech.gwtjui.core.client.WithJQueryEntryPoint.isJQueryLoaded()) {
-            inject(WithJQueryClientBundle.INSTANCE.jqueryDebug(), false);
+            inject(WithJQueryClientBundle.INSTANCE.jqueryDebug(), false, true);
         }
         super.load();
     }
