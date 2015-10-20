@@ -20,12 +20,13 @@
 <module>
   <inherits name="com.google.gwt.resources.Resources"/>
 
-  <public path="client/resources">
+  <public path="">
     <exclude name="**/*.java"/>
     <exclude name="**/*.class"/>
     <exclude name="**/*.html"/>
     <exclude name="**/*.htm"/>
     <exclude name="**/*.xml"/>
+    <exclude name="**/*.debug.cache.*"/>
   </public>
 
   <stylesheet src="css/jui-interactions-1.11.4.min.cache.css"/>

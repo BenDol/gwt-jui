@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2015 Doltech Systems Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -13,24 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client;
+package nz.co.doltech.gwtjui.interactions.client.debug;
 
-public class WithJQueryEntryPoint extends CoreEntryPoint {
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.TextResource;
 
-    @Override
-    public void load() {
-        if(!isJQueryLoaded()) {
-            inject(WithJQueryClientBundle.INSTANCE.jquery(), false);
-        }
-        super.load();
-    }
+/**
+ * @author Ben Dol
+ */
+public interface InteractionsClientBundle extends ClientBundle {
+    InteractionsClientBundle INSTANCE = GWT.create(InteractionsClientBundle.class);
 
-    /**
-     * Check to see if jQuery is loaded already
-     *
-     * @return true is jQuery is loaded, false otherwise
-     */
-    public static native boolean isJQueryLoaded() /*-{
-        return (typeof $wnd['jQuery'] !== 'undefined');
-    }-*/;
+    @Source("nz/co/doltech/gwtjui/interactions/client/resources/js/jui-interactions-1.11.4.cache.js")
+    TextResource jqueryUiDebug();
 }

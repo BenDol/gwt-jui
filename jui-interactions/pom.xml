@@ -53,6 +53,7 @@
                         </goals>
                         <phase>test</phase>
                         <configuration>
+                            <excludes>**/*Debug.gwt.xml</excludes>
                             <includes>**/*GwtTest.java</includes>
                             <skipTests>true</skipTests>
                         </configuration>

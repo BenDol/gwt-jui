@@ -19,6 +19,8 @@ import nz.co.doltech.gwtjui.core.client.base.AbstractEntryPoint;
 import nz.co.doltech.gwtjui.core.client.base.Dependency;
 import nz.co.doltech.gwtjui.core.client.base.DependencySet;
 
+import java.util.logging.Logger;
+
 public class CoreEntryPoint extends AbstractEntryPoint<CoreEntryPoint> {
 
     private static final Dependency<CoreEntryPoint> dependency = new Dependency<>(
@@ -29,7 +31,11 @@ public class CoreEntryPoint extends AbstractEntryPoint<CoreEntryPoint> {
         }
         @Override
         public void onLoad(CoreEntryPoint entryPoint) {}
-    });
+    }, "Core");
+
+    public CoreEntryPoint() {
+        super(Logger.getLogger(CoreEntryPoint.class.getName()));
+    }
 
     @Override
     public void load() {

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2015 Doltech Systems Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -13,24 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client;
+package nz.co.doltech.gwtjui.interactions.client.util;
 
-public class WithJQueryEntryPoint extends CoreEntryPoint {
+import nz.co.doltech.gwtjui.core.client.js.JsFunction;
 
-    @Override
-    public void load() {
-        if(!isJQueryLoaded()) {
-            inject(WithJQueryClientBundle.INSTANCE.jquery(), false);
-        }
-        super.load();
+public class Helper {
+
+    private final HelpType helpType;
+    private final JsFunction callback;
+
+    public Helper(HelpType helpType) {
+        this.helpType = helpType;
+        callback = null;
     }
 
-    /**
-     * Check to see if jQuery is loaded already
-     *
-     * @return true is jQuery is loaded, false otherwise
-     */
-    public static native boolean isJQueryLoaded() /*-{
-        return (typeof $wnd['jQuery'] !== 'undefined');
-    }-*/;
+    public Helper(JsFunction callback) {
+        this.callback = callback;
+        helpType = HelpType.ORIGINAL;
+    }
+
+    public Object get() {
+        return callback != null ? callback : helpType;
+    }
 }

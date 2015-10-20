@@ -15,13 +15,13 @@
   ~ the License.
   -->
 
-<module>
-  <inherits name="nz.co.doltech.gwtjui.core.Jui" />
+<module rename-to="gwtjui">
+  <inherits name="nz.co.doltech.gwtjui.interactions.client.resources.ResourcesDebug"/>
 
-  <public path="uilightness">
-    <include>*.css</include>
-    <include>image/*</include>
-  </public>
+  <!-- JQuery Dependencies -->
+  <inherits name="nz.co.doltech.gwtjui.core.JuiDebug" />
 
-  <stylesheet src="uilightness/theme-1.11.4.min.cache.css"/>
+  <source path="client" />
+
+  <entry-point class="nz.co.doltech.gwtjui.interactions.client.debug.InteractionsEntryPoint"/>
 </module>

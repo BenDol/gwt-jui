@@ -19,6 +19,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.user.client.Command;
 
 import java.util.logging.Logger;
 
@@ -48,7 +49,7 @@ public abstract class AbstractEntryPoint<T extends AbstractEntryPoint> implement
                     if(ready) {
                         AbstractEntryPoint.this.invokeLoad();
                     }
-                    return ready;
+                    return !ready;
                 }
             }, 400);
         } else {
@@ -58,10 +59,11 @@ public abstract class AbstractEntryPoint<T extends AbstractEntryPoint> implement
 
     @SuppressWarnings("unchecked")
     private void invokeLoad() {
-        Dependency<T> dependency = getDependency();
+        final Dependency<T> dependency = getDependency();
         if(!dependency.isLoaded()) {
-            dependency.onLoad((T) this);
+            dependency.onLoad((T) AbstractEntryPoint.this);
             load();
+            logger.fine("Loaded JQueryUI dependency: " + dependency.getName());
         }
     }
 
@@ -76,5 +78,9 @@ public abstract class AbstractEntryPoint<T extends AbstractEntryPoint> implement
             .setWindow(ScriptInjector.TOP_WINDOW)
             .setRemoveTag(removeTag)
             .inject();
+    }
+
+    public Logger getLogger() {
+        return logger;
     }
 }

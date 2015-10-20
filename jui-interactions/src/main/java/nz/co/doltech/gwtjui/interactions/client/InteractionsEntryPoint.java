@@ -15,10 +15,11 @@
  */
 package nz.co.doltech.gwtjui.interactions.client;
 
-import nz.co.doltech.gwtjui.core.client.CoreEntryPoint;
 import nz.co.doltech.gwtjui.core.client.base.AbstractEntryPoint;
 import nz.co.doltech.gwtjui.core.client.base.Dependency;
 import nz.co.doltech.gwtjui.core.client.base.DependencySet;
+
+import java.util.logging.Logger;
 
 public class InteractionsEntryPoint extends AbstractEntryPoint<InteractionsEntryPoint> {
 
@@ -30,7 +31,11 @@ public class InteractionsEntryPoint extends AbstractEntryPoint<InteractionsEntry
         }
         @Override
         public void onLoad(InteractionsEntryPoint entryPoint) {}
-    });
+    }, "Interactions");
+
+    public InteractionsEntryPoint() {
+        super(Logger.getLogger(InteractionsEntryPoint.class.getName()));
+    }
 
     @Override
     protected void load() {
@@ -40,7 +45,7 @@ public class InteractionsEntryPoint extends AbstractEntryPoint<InteractionsEntry
     @Override
     protected DependencySet<InteractionsEntryPoint> setupDependencies() {
         return new DependencySet<>(this,
-            CoreEntryPoint.asDependency()
+            nz.co.doltech.gwtjui.core.client.CoreEntryPoint.asDependency()
         );
     }
 

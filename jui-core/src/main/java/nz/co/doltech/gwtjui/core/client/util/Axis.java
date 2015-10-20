@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2015 Doltech Systems Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -13,24 +13,28 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client;
+package nz.co.doltech.gwtjui.core.client.util;
 
-public class WithJQueryEntryPoint extends CoreEntryPoint {
+import com.google.gwt.dom.client.Style;
+
+public enum Axis implements Style.HasCssName {
+    X {
+        @Override
+        public String getCssName() {
+            return "x";
+        }
+    },
+    Y {
+        @Override
+        public String getCssName() {
+            return "y";
+        }
+    };
+    @Override
+    public abstract String getCssName();
 
     @Override
-    public void load() {
-        if(!isJQueryLoaded()) {
-            inject(WithJQueryClientBundle.INSTANCE.jquery(), false);
-        }
-        super.load();
+    public String toString() {
+        return getCssName();
     }
-
-    /**
-     * Check to see if jQuery is loaded already
-     *
-     * @return true is jQuery is loaded, false otherwise
-     */
-    public static native boolean isJQueryLoaded() /*-{
-        return (typeof $wnd['jQuery'] !== 'undefined');
-    }-*/;
 }

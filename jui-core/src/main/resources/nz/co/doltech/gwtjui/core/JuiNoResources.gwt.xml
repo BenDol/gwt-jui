@@ -19,6 +19,6 @@
 
 <module rename-to="gwtjui">
   <inherits name="nz.co.doltech.gwtjui.core.JuiBase"/>
-
+  
   <source path="client" />
 </module>

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2015 Doltech Systems Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -13,24 +13,27 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client;
+package nz.co.doltech.gwtjui.core.client.js;
 
-public class WithJQueryEntryPoint extends CoreEntryPoint {
+import com.google.gwt.core.client.JavaScriptObject;
+import nz.co.doltech.gwtjui.core.client.base.IsJavaScriptObject;
 
-    @Override
-    public void load() {
-        if(!isJQueryLoaded()) {
-            inject(WithJQueryClientBundle.INSTANCE.jquery(), false);
-        }
-        super.load();
+public class JsFunction implements IsJavaScriptObject {
+
+    private JavaScriptObject func;
+
+    public JsFunction(final Runnable runnable) {
+        this.func = toFunction(runnable);
     }
 
-    /**
-     * Check to see if jQuery is loaded already
-     *
-     * @return true is jQuery is loaded, false otherwise
-     */
-    public static native boolean isJQueryLoaded() /*-{
-        return (typeof $wnd['jQuery'] !== 'undefined');
+    public native JavaScriptObject toFunction(final Runnable runnable) /*-{
+        return function() {
+            runnable.@java.lang.Runnable::run()();
+        }
     }-*/;
+
+    @Override
+    public JavaScriptObject asJavaScript() {
+        return func;
+    }
 }
