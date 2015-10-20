@@ -528,10 +528,6 @@ public class Sortable extends JuiWrapper {
         command("refreshPositions");
     }
 
-    public void disableSelection() {
-        disableSelection(getElement());
-    }
-
     @Override
     protected void remove(Element e) {
         destroy();

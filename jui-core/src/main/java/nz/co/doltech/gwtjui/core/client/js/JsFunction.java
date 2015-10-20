@@ -22,6 +22,8 @@ public class JsFunction implements IsJavaScriptObject {
 
     private JavaScriptObject func;
 
+    private JsFunction() {}
+
     public JsFunction(final Runnable runnable) {
         this.func = toFunction(runnable);
     }
@@ -31,6 +33,10 @@ public class JsFunction implements IsJavaScriptObject {
             runnable.@java.lang.Runnable::run()();
         }
     }-*/;
+
+    public static JsFunction blank() {
+        return new JsFunction();
+    }
 
     @Override
     public JavaScriptObject asJavaScript() {

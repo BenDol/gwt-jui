@@ -86,4 +86,15 @@ public abstract class JuiWrapper extends JuiQuery {
     public native void disableSelection(Element e) /*-{
         $wnd.jQuery(e).disableSelection();
     }-*/;
+
+    /**
+     * Selects elements which have data stored under the specified key.
+     */
+    public void data(String key, Object value) {
+        data(getElement(), key, value);
+    }
+
+    public native void data(Element e, String key, Object value) /*-{
+        $wnd.jQuery(e).data(key, value);
+    }-*/;
 }
