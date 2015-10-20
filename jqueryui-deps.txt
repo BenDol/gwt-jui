@@ -1,0 +1,46 @@
+JQueryUI 1.11.4 Dependencies:
+
+UI Core:
+  Core: [ None ]
+  Widget: [ None ]
+  Mouse: [ Core, Widget ]
+  Position: [ None ]
+  
+Interactions
+  Draggable: [ Core, Widget, Mouse ]
+  Droppable: [ Core, Draggable, Widget, Mouse ]
+  Resizable: [ Core, Widget, Mouse ]
+  Selectable: [ Core, Widget, Mouse ]
+  Sortable: [ Core, Widget, Mouse ]
+  
+Widgets:
+  Accordion: [ Core, Widget ]
+  Autocomplete: [ Core, Widget, Position, Menu ]
+  Button: [ Core, Widget ]
+  Datepicker: [ Core ]
+  Dialog: [ Core, Widget, Mouse, Position, Draggable, Resizable, Button ]
+  Menu [ Core, Widget, Position ]
+  Progressbar: [ Core, Widget ]
+  Selectmenu: [ Core, Widget, Position, Menu ]
+  Slider: [ Core, Widget, Mouse ]
+  Spinner: [ Core, Widget, Button ]
+  Tabs: [ Core, Widget ]
+  Tooltip: [ Core, Widget, Position ]
+  
+Effects:
+  Effects Core: [ None ]
+  Blind Effect: [ Effects Core ]
+  Bounce Effect: [ Effects Core ]
+  Clip Effect: [ Effects Core ]
+  Drop Effect: [ Effects Core ]
+  Explode Effect: [ Effects Core ]
+  Fade Effect: [ Effects Core ]
+  Fold Effect: [ Effects Core ]
+  Highlight Effect: [ Effects Core ]
+  Puff Effect: [ Effects Core, Scale Effect, Size Effect ]
+  Pulsate Effeect: [ Effects Core ]
+  Scale Effect: [ Effects Core, Size Effect ]
+  Shake Effect: [ Effects Core ]
+  Size Effect: [ Effects Core ]
+  Slide Effect: [ Effects Core ]
+  Transfer Effect: [ Effects Core ]
