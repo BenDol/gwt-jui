@@ -15,14 +15,31 @@
  */
 package nz.co.doltech.gwtjui.core.client;
 
+import nz.co.doltech.gwtjui.core.client.base.Dependency;
+
 public class WithJQueryEntryPoint extends CoreEntryPoint {
 
+    private static final Dependency<CoreEntryPoint> dependency = new Dependency<>(
+            new Dependency.LoadCheck<CoreEntryPoint>() {
+        @Override
+        public boolean loadCheck() {
+            return isJQueryLoaded();
+        }
+        @Override
+        public void onLoad(CoreEntryPoint entryPoint) {}
+    }, "JQuery");
+
     @Override
-    public void load() {
+    public void onModuleLoad() {
         if(!isJQueryLoaded()) {
             inject(WithJQueryClientBundle.INSTANCE.jquery(), true, false);
         }
-        super.load();
+
+        super.onModuleLoad();
+    }
+
+    public static Dependency<CoreEntryPoint> asDependency() {
+        return dependency;
     }
 
     /**

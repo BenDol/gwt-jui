@@ -15,7 +15,20 @@
  */
 package nz.co.doltech.gwtjui.core.client.base;
 
+import com.google.gwt.core.client.JavaScriptException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Dependency<T extends AbstractEntryPoint> {
+
+    private final static Logger logger = Logger.getLogger(Dependency.class.getName());
+
+    public interface WhenLoaded {
+        void onLoaded();
+    }
 
     public interface LoadCheck<L extends AbstractEntryPoint> {
         boolean loadCheck();
@@ -24,18 +37,31 @@ public class Dependency<T extends AbstractEntryPoint> {
 
     private final String name;
     private final LoadCheck<T> loadCheck;
+    private final List<WhenLoaded> whenLoadeds;
 
     public Dependency(LoadCheck<T> loadCheck, String name) {
         this.loadCheck = loadCheck;
         this.name = name;
+        this.whenLoadeds = new ArrayList<>();
     }
 
     public boolean isLoaded() {
-        return loadCheck.loadCheck();
+        try {
+            return loadCheck.loadCheck();
+        } catch (JavaScriptException ex) {
+            logger.log(Level.FINE, "Dependency load check threw: ", ex);
+            return false;
+        }
     }
 
     public void onLoad(T entry) {
         loadCheck.onLoad(entry);
+    }
+
+    public void onLoaded(T entry) {
+        for(WhenLoaded whenLoaded : whenLoadeds) {
+            whenLoaded.onLoaded();
+        }
     }
 
     public LoadCheck<T> getLoadCheck() {
@@ -44,5 +70,15 @@ public class Dependency<T extends AbstractEntryPoint> {
 
     public String getName() {
         return name;
+    }
+
+    public void whenLoaded(WhenLoaded whenLoaded) {
+        if(isLoaded()) {
+            whenLoaded.onLoaded();
+        } else {
+            if (!whenLoadeds.contains(whenLoaded)) {
+                whenLoadeds.add(whenLoaded);
+            }
+        }
     }
 }

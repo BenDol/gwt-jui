@@ -15,6 +15,7 @@
  */
 package nz.co.doltech.gwtjui.interactions.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.user.client.Event;
@@ -27,6 +28,7 @@ import nz.co.doltech.gwtjui.core.client.util.Axis;
 import nz.co.doltech.gwtjui.core.client.js.JsPoint;
 import nz.co.doltech.gwtjui.interactions.client.util.HelpType;
 import nz.co.doltech.gwtjui.interactions.client.util.Helper;
+import nz.co.doltech.gwtjui.interactions.client.util.SortableHash;
 import nz.co.doltech.gwtjui.interactions.client.util.Tolerance;
 
 /**
@@ -66,6 +68,10 @@ public class Sortable extends JuiWrapper {
     private double scrollSpeed;
     private Tolerance tolerance;
     private int zIndex;
+
+    public Sortable(Element element) {
+        super(element);
+    }
 
     public Sortable(Widget widget) {
         super(widget);
@@ -495,6 +501,10 @@ public class Sortable extends JuiWrapper {
         command("refreshPositions");
     }
 
+    public void disableSelection() {
+        disableSelection(getElement());
+    }
+
     @Override
     protected void remove(Element e) {
         destroy();
@@ -502,15 +512,21 @@ public class Sortable extends JuiWrapper {
 
     // Events
 
-    private void onActivate(Event event) {
-
+    private void onActivate(Event event, JavaScriptObject hash) {
+        SortableHash sortableHash = new SortableHash(hash);
     }
+
+    public native void disableSelection(Element e) /*-{
+        $wnd.jQuery(e).disableSelection();
+    }-*/;
 
     @Override
     protected native void initialize(Element e) /*-{
         var that = this;
         $wnd.jQuery(e).sortable({
-            activate: null,
+            activate: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onActivate(*)(e, ui);
+            },
             beforeStop: null,
             change: null,
             deactivate: null,

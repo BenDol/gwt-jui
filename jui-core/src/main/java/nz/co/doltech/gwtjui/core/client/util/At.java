@@ -15,6 +15,9 @@
  */
 package nz.co.doltech.gwtjui.core.client.util;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Style;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +46,23 @@ public class At {
             throw new RuntimeException(
                 "Cannot add multiple " + movement.getDirection() + " directions.");
         }
+    }
+
+    public native static At fromJavaScriptObject(JavaScriptObject jso) /*-{
+        if(jso !== undefined) {
+            return @nz.co.doltech.gwtjui.core.client.util.At::newInstance(*)(jso.left, jso.right, jso.top, jso.bottom);
+        } else {
+            return null;
+        }
+    }-*/;
+
+    protected static At newInstance(double left, double right, double top, double bottom) {
+        At at = new At();
+        at.addMovement(new Movement(Direction.LEFT, left, Style.Unit.PX));
+        at.addMovement(new Movement(Direction.RIGHT, right, Style.Unit.PX));
+        at.addMovement(new Movement(Direction.TOP, top, Style.Unit.PX));
+        at.addMovement(new Movement(Direction.BOTTOM, bottom, Style.Unit.PX));
+        return at;
     }
 
     @Override

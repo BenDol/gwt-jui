@@ -17,7 +17,7 @@
   ~  */
   -->
 
-<module rename-to="gwtjui">
+<module>
   <!-- JQuery Dependencies -->
   <inherits name="nz.co.doltech.gwtjui.core.JuiNoResources" />
 

@@ -25,12 +25,25 @@ import nz.co.doltech.gwtjui.core.client.base.IsJavaScriptObject;
 
 public abstract class JuiWrapper extends UIObject implements IsWidget {
 
-    private final Widget widget;
+    private class GhostWidget extends Widget {
+        public GhostWidget(Element element) {
+            setElement(element);
+        }
+    }
+
+    private Widget widget;
+
+    public JuiWrapper(Element element) {
+        setupWidget(new GhostWidget(element));
+    }
 
     public JuiWrapper(Widget widget) {
-        setElement((Element) widget.getElement());
+        setupWidget(widget);
+    }
 
+    private void setupWidget(Widget widget) {
         this.widget = widget;
+        setElement((Element) this.widget.getElement());
 
         widget.addAttachHandler(new AttachEvent.Handler() {
             @Override

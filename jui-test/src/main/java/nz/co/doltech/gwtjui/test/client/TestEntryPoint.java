@@ -13,15 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client.debug;
+package nz.co.doltech.gwtjui.test.client;
 
-public class WithJQueryEntryPoint extends CoreEntryPoint {
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.RootPanel;
+import nz.co.doltech.gwtjui.core.client.base.Dependency;
+import nz.co.doltech.gwtjui.interactions.client.InteractionsEntryPoint;
+
+public class TestEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        if(!nz.co.doltech.gwtjui.core.client.WithJQueryEntryPoint.isJQueryLoaded()) {
-            inject(WithJQueryClientBundle.INSTANCE.jqueryDebug(), true, false);
-        }
-        super.onModuleLoad();
+        InteractionsEntryPoint.asDependency().whenLoaded(new Dependency.WhenLoaded() {
+            @Override
+            public void onLoaded() {
+                RootPanel.get().add(new SortableTest());
+            }
+        });
     }
 }

@@ -15,7 +15,7 @@
   ~ the License.
   -->
 
-<module rename-to="gwtjui">
+<module>
   <inherits name="nz.co.doltech.gwtjui.interactions.client.resources.ResourcesDebug"/>
 
   <!-- JQuery Dependencies -->

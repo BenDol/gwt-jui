@@ -29,9 +29,12 @@
         <module>jui-core</module>
         <module>jui-interactions</module>
         <module>jui-themes</module>
+        <module>jui-test</module>
     </modules>
 
     <properties>
+        <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+
         <source.version>1.7</source.version>
         <gwt.version>2.7.0</gwt.version>
     </properties>
@@ -41,6 +44,16 @@
             <dependency>
                 <groupId>nz.co.doltech</groupId>
                 <artifactId>gwt-jui-core</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>nz.co.doltech</groupId>
+                <artifactId>gwt-jui-interactions</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>nz.co.doltech</groupId>
+                <artifactId>gwt-jui-themes</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 

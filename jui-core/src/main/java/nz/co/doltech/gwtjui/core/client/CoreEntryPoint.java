@@ -44,7 +44,9 @@ public class CoreEntryPoint extends AbstractEntryPoint<CoreEntryPoint> {
 
     @Override
     protected DependencySet<CoreEntryPoint> setupDependencies() {
-        return null; // no dependencies
+        return new DependencySet<>(this,
+            WithJQueryEntryPoint.asDependency()
+        );
     }
 
     @Override

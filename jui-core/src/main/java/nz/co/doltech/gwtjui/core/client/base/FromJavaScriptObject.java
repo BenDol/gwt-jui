@@ -13,15 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client.debug;
+package nz.co.doltech.gwtjui.core.client.base;
 
-public class WithJQueryEntryPoint extends CoreEntryPoint {
+import com.google.gwt.core.client.JavaScriptObject;
 
-    @Override
-    public void onModuleLoad() {
-        if(!nz.co.doltech.gwtjui.core.client.WithJQueryEntryPoint.isJQueryLoaded()) {
-            inject(WithJQueryClientBundle.INSTANCE.jqueryDebug(), true, false);
-        }
-        super.onModuleLoad();
-    }
+/**
+ * @author Ben Dol
+ */
+public interface FromJavaScriptObject<T extends JavaScriptObject> {
+    void fromJavaScriptObject(T jso);
 }

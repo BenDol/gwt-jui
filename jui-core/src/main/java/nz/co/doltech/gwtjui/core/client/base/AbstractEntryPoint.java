@@ -40,7 +40,7 @@ public abstract class AbstractEntryPoint<T extends AbstractEntryPoint> implement
                 @Override
                 public boolean execute() {
                     tries++;
-                    if(tries > 100) {
+                    if(tries > 1000) {
                         logger.warning("Dependencies are taking an abnormally " +
                             "long time to load: " + dependencies);
                     }
@@ -51,7 +51,7 @@ public abstract class AbstractEntryPoint<T extends AbstractEntryPoint> implement
                     }
                     return !ready;
                 }
-            }, 400);
+            }, 40);
         } else {
             invokeLoad();
         }
@@ -61,8 +61,16 @@ public abstract class AbstractEntryPoint<T extends AbstractEntryPoint> implement
     private void invokeLoad() {
         final Dependency<T> dependency = getDependency();
         if(!dependency.isLoaded()) {
-            dependency.onLoad((T) AbstractEntryPoint.this);
+            final T entryPoint = (T) AbstractEntryPoint.this;
+            dependency.onLoad(entryPoint);
             load();
+
+            Scheduler.get().scheduleDeferred(new Command() {
+                @Override
+                public void execute() {
+                    dependency.onLoaded(entryPoint);
+                }
+            });
             logger.fine("Loaded JQueryUI dependency: " + dependency.getName());
         }
     }
