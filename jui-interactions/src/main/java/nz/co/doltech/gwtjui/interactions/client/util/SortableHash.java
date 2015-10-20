@@ -17,16 +17,16 @@ package nz.co.doltech.gwtjui.interactions.client.util;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import nz.co.doltech.gwtjui.core.client.base.FromJavaScriptObject;
+import nz.co.doltech.gwtjui.core.client.base.EventHash;
 import nz.co.doltech.gwtjui.core.client.util.At;
 
-public class SortableHash implements FromJavaScriptObject {
+public class SortableHash implements EventHash {
 
     private Element helper;
     private Element item;
     private Element placeholder;
     private Element sender;
-    private double offset;
+    private At offset;
     private At originalPos;
     private At pos;
 
@@ -66,12 +66,16 @@ public class SortableHash implements FromJavaScriptObject {
         this.sender = sender;
     }
 
-    public double getOffset() {
+    public At getOffset() {
         return offset;
     }
 
-    public void setOffset(double offset) {
+    public void setOffset(At offset) {
         this.offset = offset;
+    }
+
+    public void setOffset(JavaScriptObject offset) {
+        this.offset = At.fromJavaScriptObject(offset);
     }
 
     public At getOriginalPos() {
@@ -82,8 +86,8 @@ public class SortableHash implements FromJavaScriptObject {
         this.originalPos = originalPos;
     }
 
-    public void setOriginalPos(JavaScriptObject jso) {
-        this.originalPos = At.fromJavaScriptObject(jso);
+    public void setOriginalPos(JavaScriptObject originalPos) {
+        this.originalPos = At.fromJavaScriptObject(originalPos);
     }
 
     public At getPos() {
@@ -94,17 +98,25 @@ public class SortableHash implements FromJavaScriptObject {
         this.pos = pos;
     }
 
-    public void setPos(JavaScriptObject jso) {
-        this.pos = At.fromJavaScriptObject(jso);
+    public void setPos(JavaScriptObject pos) {
+        this.pos = At.fromJavaScriptObject(pos);
     }
 
     @Override
     public native void fromJavaScriptObject(JavaScriptObject jso) /*-{
-        this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::helper = jso.helper[0];
-        this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::item = jso.item[0];
-        this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::placeholder = jso.placeholder[0];
-        this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::sender = jso.sender[0];
-        this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::offset = jso.offset;
+        if(jso.helper !== null) {
+            this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::helper = jso.helper[0];
+        }
+        if(jso.item !== null) {
+            this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::item = jso.item[0];
+        }
+        if(jso.placeholder !== null) {
+            this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::placeholder = jso.placeholder[0];
+        }
+        if(jso.sender !== null) {
+            this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::sender = jso.sender[0];
+        }
+        this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::setOffset(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.offset);
         this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::setOriginalPos(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.originalPosition);
         this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::setPos(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.position);
     }-*/;

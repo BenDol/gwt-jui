@@ -19,33 +19,42 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Style;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ben Dol
  */
 public class At {
-    private List<Movement> movements = new ArrayList<>();
-
-    public At(Movement... movements) {
-        if (movements != null) {
-            for (Movement movement : movements) {
-                addMovement(movement);
-            }
-        }
-    }
+    private Map<Direction, Movement> movements = new HashMap<>();
 
     public List<Movement> getMovements() {
-        return movements;
+        return new ArrayList<>(movements.values());
     }
 
-    public void addMovement(Movement movement) {
-        if (!movements.contains(movement)) {
-            movements.add(movement);
-        } else {
-            throw new RuntimeException(
-                "Cannot add multiple " + movement.getDirection() + " directions.");
-        }
+    public Movement getMovement(Direction direction) {
+        return movements.get(direction);
+    }
+
+    public void setLeft(Movement.Left left) {
+        assert left.getDirection().equals(Direction.LEFT) : "Move is not left";
+        movements.put(Direction.LEFT, left);
+    }
+
+    public void setRight(Movement.Right right) {
+        assert right.getDirection().equals(Direction.RIGHT) : "Move is not right";
+        movements.put(Direction.RIGHT, right);
+    }
+
+    public void setTop(Movement.Top top) {
+        assert top.getDirection().equals(Direction.TOP) : "Move is not top";
+        movements.put(Direction.TOP, top);
+    }
+
+    public void setBottom(Movement.Bottom bottom) {
+        assert bottom.getDirection().equals(Direction.BOTTOM) : "Move is not bottom";
+        movements.put(Direction.BOTTOM, bottom);
     }
 
     public native static At fromJavaScriptObject(JavaScriptObject jso) /*-{
@@ -58,10 +67,18 @@ public class At {
 
     protected static At newInstance(double left, double right, double top, double bottom) {
         At at = new At();
-        at.addMovement(new Movement(Direction.LEFT, left, Style.Unit.PX));
-        at.addMovement(new Movement(Direction.RIGHT, right, Style.Unit.PX));
-        at.addMovement(new Movement(Direction.TOP, top, Style.Unit.PX));
-        at.addMovement(new Movement(Direction.BOTTOM, bottom, Style.Unit.PX));
+        if(!new Double(left).isNaN()) {
+            at.setLeft(new Movement.Left(left, Style.Unit.PX));
+        }
+        if(!new Double(right).isNaN()) {
+            at.setRight(new Movement.Right(right, Style.Unit.PX));
+        }
+        if(!new Double(top).isNaN()) {
+            at.setTop(new Movement.Top(top, Style.Unit.PX));
+        }
+        if(!new Double(bottom).isNaN()) {
+            at.setBottom(new Movement.Bottom(bottom, Style.Unit.PX));
+        }
         return at;
     }
 
@@ -69,7 +86,7 @@ public class At {
     public String toString() {
         String result = "{";
         boolean useComma = false;
-        for(Movement movement : movements) {
+        for(Movement movement : movements.values()) {
             result += (useComma ? ", " : "") + movement.toString();
             useComma = true;
         }

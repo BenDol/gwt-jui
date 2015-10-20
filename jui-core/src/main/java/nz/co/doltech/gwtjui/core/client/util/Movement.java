@@ -18,6 +18,38 @@ package nz.co.doltech.gwtjui.core.client.util;
 import com.google.gwt.dom.client.Style;
 
 public class Movement {
+    public static class Left extends Movement {
+        public Left(double amount, Style.Unit unit) {
+            super(Direction.LEFT, amount, unit);
+        }
+        @Override
+        public void setDirection(Direction direction) {}
+    }
+
+    public static class Right extends Movement {
+        public Right(double amount, Style.Unit unit) {
+            super(Direction.RIGHT, amount, unit);
+        }
+        @Override
+        public void setDirection(Direction direction) {}
+    }
+
+    public static class Top extends Movement {
+        public Top(double amount, Style.Unit unit) {
+            super(Direction.TOP, amount, unit);
+        }
+        @Override
+        public void setDirection(Direction direction) {}
+    }
+
+    public static class Bottom extends Movement {
+        public Bottom(double amount, Style.Unit unit) {
+            super(Direction.BOTTOM, amount, unit);
+        }
+        @Override
+        public void setDirection(Direction direction) {}
+    }
+
     private Direction direction;
     private double amount;
     private Style.Unit unit;

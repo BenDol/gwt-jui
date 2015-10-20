@@ -18,6 +18,7 @@ package nz.co.doltech.gwtjui.interactions.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Cursor;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
@@ -26,6 +27,32 @@ import nz.co.doltech.gwtjui.core.client.js.JsFunction;
 import nz.co.doltech.gwtjui.core.client.util.At;
 import nz.co.doltech.gwtjui.core.client.util.Axis;
 import nz.co.doltech.gwtjui.core.client.js.JsPoint;
+import nz.co.doltech.gwtjui.core.client.events.ActivateEvent;
+import nz.co.doltech.gwtjui.core.client.events.ActivateHandler;
+import nz.co.doltech.gwtjui.core.client.events.BeforeStopEvent;
+import nz.co.doltech.gwtjui.core.client.events.BeforeStopHandler;
+import nz.co.doltech.gwtjui.core.client.events.ChangeEvent;
+import nz.co.doltech.gwtjui.core.client.events.ChangeHandler;
+import nz.co.doltech.gwtjui.core.client.events.CreateEvent;
+import nz.co.doltech.gwtjui.core.client.events.CreateHandler;
+import nz.co.doltech.gwtjui.core.client.events.DeactivateEvent;
+import nz.co.doltech.gwtjui.core.client.events.DeactivateHandler;
+import nz.co.doltech.gwtjui.core.client.events.OutEvent;
+import nz.co.doltech.gwtjui.core.client.events.OutHandler;
+import nz.co.doltech.gwtjui.core.client.events.OverEvent;
+import nz.co.doltech.gwtjui.core.client.events.OverHandler;
+import nz.co.doltech.gwtjui.core.client.events.ReceiveEvent;
+import nz.co.doltech.gwtjui.core.client.events.ReceiveHandler;
+import nz.co.doltech.gwtjui.core.client.events.RemoveEvent;
+import nz.co.doltech.gwtjui.core.client.events.RemoveHandler;
+import nz.co.doltech.gwtjui.core.client.events.SortEvent;
+import nz.co.doltech.gwtjui.core.client.events.SortHandler;
+import nz.co.doltech.gwtjui.core.client.events.StartEvent;
+import nz.co.doltech.gwtjui.core.client.events.StartHandler;
+import nz.co.doltech.gwtjui.core.client.events.StopEvent;
+import nz.co.doltech.gwtjui.core.client.events.StopHandler;
+import nz.co.doltech.gwtjui.core.client.events.UpdateEvent;
+import nz.co.doltech.gwtjui.core.client.events.UpdateHandler;
 import nz.co.doltech.gwtjui.interactions.client.util.HelpType;
 import nz.co.doltech.gwtjui.interactions.client.util.Helper;
 import nz.co.doltech.gwtjui.interactions.client.util.SortableHash;
@@ -512,13 +539,111 @@ public class Sortable extends JuiWrapper {
 
     // Events
 
-    private void onActivate(Event event, JavaScriptObject hash) {
-        SortableHash sortableHash = new SortableHash(hash);
+    public HandlerRegistration addActivateHandler(ActivateHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, ActivateEvent.getType());
     }
 
-    public native void disableSelection(Element e) /*-{
-        $wnd.jQuery(e).disableSelection();
-    }-*/;
+    private void onActivate(Event event, JavaScriptObject hash) {
+        ActivateEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addBeforeStopHandler(BeforeStopHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, BeforeStopEvent.getType());
+    }
+
+    private void onBeforeStop(Event event, JavaScriptObject hash) {
+        BeforeStopEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addChangeHandler(ChangeHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, ChangeEvent.getType());
+    }
+
+    private void onChange(Event event, JavaScriptObject hash) {
+        ChangeEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addCreateHandler(CreateHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, CreateEvent.getType());
+    }
+
+    private void onCreate(Event event, JavaScriptObject hash) {
+        CreateEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addDeactivateHandler(DeactivateHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, DeactivateEvent.getType());
+    }
+
+    private void onDeactivate(Event event, JavaScriptObject hash) {
+        DeactivateEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addOutHandler(OutHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, OutEvent.getType());
+    }
+
+    private void onOut(Event event, JavaScriptObject hash) {
+        OutEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addOverHandler(OverHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, OverEvent.getType());
+    }
+
+    private void onOver(Event event, JavaScriptObject hash) {
+        OverEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addReceiveHandler(ReceiveHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, ReceiveEvent.getType());
+    }
+
+    private void onReceive(Event event, JavaScriptObject hash) {
+        ReceiveEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addRemoveHandler(RemoveHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, RemoveEvent.getType());
+    }
+
+    private void onRemove(Event event, JavaScriptObject hash) {
+        RemoveEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addSortHandler(SortHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, SortEvent.getType());
+    }
+
+    private void onSort(Event event, JavaScriptObject hash) {
+        SortEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addStartHandler(StartHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, StartEvent.getType());
+    }
+
+    private void onStart(Event event, JavaScriptObject hash) {
+        StartEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addStopHandler(StopHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, StopEvent.getType());
+    }
+
+    private void onStop(Event event, JavaScriptObject hash) {
+        StopEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    public HandlerRegistration addUpdateHandler(UpdateHandler<Sortable, SortableHash> handler) {
+        return addHandler(handler, UpdateEvent.getType());
+    }
+
+    private void onUpdate(Event event, JavaScriptObject hash) {
+        UpdateEvent.fire(this, new SortableHash(hash), event);
+    }
+
+    // Native Methods
 
     @Override
     protected native void initialize(Element e) /*-{
@@ -527,17 +652,39 @@ public class Sortable extends JuiWrapper {
             activate: function(e, ui) {
                 that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onActivate(*)(e, ui);
             },
-            beforeStop: null,
-            change: null,
-            deactivate: null,
-            out: null,
-            over: null,
-            receive: null,
-            remove: null,
-            sort: null,
-            start: null,
-            stop: null,
-            update: null
+            beforeStop: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onBeforeStop(*)(e, ui);
+            },
+            change: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onChange(*)(e, ui);
+            },
+            deactivate: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onDeactivate(*)(e, ui);
+            },
+            out: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onOut(*)(e, ui);
+            },
+            over: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onOver(*)(e, ui);
+            },
+            receive: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onReceive(*)(e, ui);
+            },
+            remove: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onRemove(*)(e, ui);
+            },
+            sort: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onSort(*)(e, ui);
+            },
+            start: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onStart(*)(e, ui);
+            },
+            stop: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onStop(*)(e, ui);
+            },
+            update: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onUpdate(*)(e, ui);
+            }
         });
     }-*/;
 

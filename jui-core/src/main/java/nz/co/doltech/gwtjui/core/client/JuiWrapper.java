@@ -17,49 +17,17 @@ package nz.co.doltech.gwtjui.core.client;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.event.logical.shared.AttachEvent;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import nz.co.doltech.gwtjui.core.client.base.IsJavaScriptObject;
 
-public abstract class JuiWrapper extends UIObject implements IsWidget {
-
-    private class GhostWidget extends Widget {
-        public GhostWidget(Element element) {
-            setElement(element);
-        }
-    }
-
-    private Widget widget;
+public abstract class JuiWrapper extends JuiQuery {
 
     public JuiWrapper(Element element) {
-        setupWidget(new GhostWidget(element));
+        super(element);
     }
 
     public JuiWrapper(Widget widget) {
-        setupWidget(widget);
-    }
-
-    private void setupWidget(Widget widget) {
-        this.widget = widget;
-        setElement((Element) this.widget.getElement());
-
-        widget.addAttachHandler(new AttachEvent.Handler() {
-            @Override
-            public void onAttachOrDetach(AttachEvent event) {
-                if(event.isAttached()) {
-                    onLoad();
-                } else {
-                    onUnload();
-                }
-            }
-        });
-    }
-
-    @Override
-    public Widget asWidget() {
-        return widget;
+        super(widget);
     }
 
     protected abstract void initialize(Element element);
@@ -107,4 +75,15 @@ public abstract class JuiWrapper extends UIObject implements IsWidget {
     protected void setOption(String option, Style.HasCssName value) {
         setOption(getElement(), option, value.getCssName());
     }
+
+    /**
+     * Disable selection of text content within the set of matched elements.
+     */
+    public void disableSelection() {
+        disableSelection(getElement());
+    }
+
+    public native void disableSelection(Element e) /*-{
+        $wnd.jQuery(e).disableSelection();
+    }-*/;
 }

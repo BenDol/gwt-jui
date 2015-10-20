@@ -13,15 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client.debug;
+package nz.co.doltech.gwtjui.core.client.base;
 
-public class WithJQueryEntryPoint extends CoreEntryPoint {
+import nz.co.doltech.gwtjui.core.client.base.FromJavaScriptObject;
 
-    @Override
-    public void onModuleLoad() {
-        if(!nz.co.doltech.gwtjui.core.client.WithJQueryEntryPoint.isJQueryLoaded()) {
-            inject(WithJQueryClientBundle.INSTANCE.jqueryDebug(), false, true);
-        }
-        super.onModuleLoad();
-    }
+public interface EventHash extends FromJavaScriptObject {
 }

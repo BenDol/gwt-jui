@@ -13,15 +13,19 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client.debug;
+package nz.co.doltech.gwtjui.core.client.events;
 
-public class WithJQueryEntryPoint extends CoreEntryPoint {
+import com.google.gwt.event.shared.EventHandler;
+import nz.co.doltech.gwtjui.core.client.JuiWrapper;
+import nz.co.doltech.gwtjui.core.client.base.EventHash;
 
-    @Override
-    public void onModuleLoad() {
-        if(!nz.co.doltech.gwtjui.core.client.WithJQueryEntryPoint.isJQueryLoaded()) {
-            inject(WithJQueryClientBundle.INSTANCE.jqueryDebug(), false, true);
-        }
-        super.onModuleLoad();
-    }
+/**
+ * This event is triggered when a sortable item
+ * from the list has been dropped into another.
+ * The former is the event target.
+ *
+ * @author Ben Dol
+ */
+public interface RemoveHandler<T extends JuiWrapper, H extends EventHash> extends EventHandler {
+    void onRemove(RemoveEvent<T, H> event);
 }
