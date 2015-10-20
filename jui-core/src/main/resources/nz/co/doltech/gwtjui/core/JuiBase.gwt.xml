@@ -16,10 +16,8 @@
   ~  * the License.
   ~  */
   -->
-
 <module rename-to="gwtjui">
-  <inherits name="nz.co.doltech.gwtjui.core.JuiBase"/>
-  <inherits name="nz.co.doltech.gwtjui.core.client.resources.Resources"/>
+  <inherits name="com.google.gwt.user.User"/>
 
-  <entry-point class="nz.co.doltech.gwtjui.core.client.WithJQueryEntryPoint"/>
+  <source path="client" />
 </module>

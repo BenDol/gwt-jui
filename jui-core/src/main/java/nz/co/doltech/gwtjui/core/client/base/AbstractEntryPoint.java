@@ -20,24 +20,48 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.resources.client.TextResource;
 
+import java.util.logging.Logger;
+
 public abstract class AbstractEntryPoint<T extends AbstractEntryPoint> implements EntryPoint {
+
+    private Logger logger;
+
+    public AbstractEntryPoint(Logger logger) {
+        this.logger = logger;
+    }
 
     @Override
     public void onModuleLoad() {
         final DependencySet<T> dependencies = setupDependencies();
         if(dependencies != null) {
             Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
+                private int tries = 0;
                 @Override
                 public boolean execute() {
+                    tries++;
+                    if(tries > 100) {
+                        logger.warning("Dependencies are taking an abnormally " +
+                            "long time to load: " + dependencies);
+                    }
+
                     boolean ready = dependencies.isReady();
                     if(ready) {
-                        Dependency<T> dependency = AbstractEntryPoint.this.getDependency();
-                        dependency.onLoad(dependencies.getEntry());
-                        AbstractEntryPoint.this.load();
+                        AbstractEntryPoint.this.invokeLoad();
                     }
                     return ready;
                 }
             }, 400);
+        } else {
+            invokeLoad();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void invokeLoad() {
+        Dependency<T> dependency = getDependency();
+        if(!dependency.isLoaded()) {
+            dependency.onLoad((T) this);
+            load();
         }
     }
 

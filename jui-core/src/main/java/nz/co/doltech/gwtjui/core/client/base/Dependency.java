@@ -22,10 +22,12 @@ public class Dependency<T extends AbstractEntryPoint> {
         void onLoad(L entryPoint);
     }
 
+    private final String name;
     private final LoadCheck<T> loadCheck;
 
-    public Dependency(LoadCheck<T> loadCheck) {
+    public Dependency(LoadCheck<T> loadCheck, String name) {
         this.loadCheck = loadCheck;
+        this.name = name;
     }
 
     public boolean isLoaded() {
@@ -38,5 +40,9 @@ public class Dependency<T extends AbstractEntryPoint> {
 
     public LoadCheck<T> getLoadCheck() {
         return loadCheck;
+    }
+
+    public String getName() {
+        return name;
     }
 }

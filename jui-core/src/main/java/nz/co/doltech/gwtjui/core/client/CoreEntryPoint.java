@@ -38,7 +38,7 @@ public class CoreEntryPoint extends AbstractEntryPoint<CoreEntryPoint> {
 
     @Override
     protected DependencySet<CoreEntryPoint> setupDependencies() {
-        return null;
+        return null; // no dependencies
     }
 
     @Override
@@ -48,10 +48,6 @@ public class CoreEntryPoint extends AbstractEntryPoint<CoreEntryPoint> {
 
     public static Dependency<CoreEntryPoint> asDependency() {
         return dependency;
-    }
-
-    public static boolean isLoaded() {
-        return dependency.isLoaded();
     }
 
     /**

@@ -17,9 +17,8 @@
   ~  */
   -->
 <module rename-to="gwtjui">
+  <inherits name="nz.co.doltech.gwtjui.core.JuiBase"/>
   <inherits name="nz.co.doltech.gwtjui.core.client.resources.Resources"/>
-
-  <source path="client" />
 
   <entry-point class="nz.co.doltech.gwtjui.core.client.CoreEntryPoint"/>
 </module>

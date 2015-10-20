@@ -50,4 +50,18 @@ public class DependencySet<T extends AbstractEntryPoint> extends HashSet<Depende
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        String result = "[ ";
+        boolean useComma = false;
+        for (Dependency dependency : this) {
+            result += useComma ? ", " : "";
+            result += dependency.getName();
+            result += ": " + dependency.isLoaded();
+            useComma = true;
+        }
+        result += " ]";
+        return result;
+    }
 }

@@ -23,8 +23,8 @@ import com.google.gwt.resources.client.TextResource;
  * @author Ben Dol
  */
 public interface InteractionsClientBundle extends ClientBundle {
-  InteractionsClientBundle INSTANCE = GWT.create(InteractionsClientBundle.class);
+    InteractionsClientBundle INSTANCE = GWT.create(InteractionsClientBundle.class);
 
-  @Source("resources/js/jui-interactions-1.11.4.min.cache.js")
-  TextResource jqueryUi();
+    @Source("resources/js/jui-interactions-1.11.4.min.cache.js")
+    TextResource jqueryUi();
 }
