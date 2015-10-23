@@ -535,6 +535,10 @@ public class Sortable extends JuiWrapper {
 
     // Events
 
+    /**
+     * This event is triggered when using connected lists,
+     * every connected list on drag start receives it.
+     */
     public HandlerRegistration addActivateHandler(ActivateHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, ActivateEvent.getType());
     }
@@ -543,6 +547,10 @@ public class Sortable extends JuiWrapper {
         ActivateEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered when sorting stops, but when
+     * the placeholder/helper is still available.
+     */
     public HandlerRegistration addBeforeStopHandler(BeforeStopHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, BeforeStopEvent.getType());
     }
@@ -551,6 +559,10 @@ public class Sortable extends JuiWrapper {
         BeforeStopEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered during sorting, but only when
+     * the DOM position has changed.
+     */
     public HandlerRegistration addChangeHandler(ChangeHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, ChangeEvent.getType());
     }
@@ -559,6 +571,9 @@ public class Sortable extends JuiWrapper {
         ChangeEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * Triggered when the sortable is created.
+     */
     public HandlerRegistration addCreateHandler(CreateHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, CreateEvent.getType());
     }
@@ -567,6 +582,10 @@ public class Sortable extends JuiWrapper {
         CreateEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered when sorting was stopped,
+     * is propagated to all possible connected lists.
+     */
     public HandlerRegistration addDeactivateHandler(DeactivateHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, DeactivateEvent.getType());
     }
@@ -575,6 +594,10 @@ public class Sortable extends JuiWrapper {
         DeactivateEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered when a sortable item
+     * is moved away from a sortable list.
+     */
     public HandlerRegistration addOutHandler(OutHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, OutEvent.getType());
     }
@@ -583,6 +606,10 @@ public class Sortable extends JuiWrapper {
         OutEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered when a sortable item
+     * is moved into a sortable list.
+     */
     public HandlerRegistration addOverHandler(OverHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, OverEvent.getType());
     }
@@ -591,6 +618,11 @@ public class Sortable extends JuiWrapper {
         OverEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered when an item from a connected
+     * sortable list has been dropped into another list.
+     * The latter is the event target.
+     */
     public HandlerRegistration addReceiveHandler(ReceiveHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, ReceiveEvent.getType());
     }
@@ -599,6 +631,11 @@ public class Sortable extends JuiWrapper {
         ReceiveEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered when a sortable item
+     * from the list has been dropped into another.
+     * The former is the event target.
+     */
     public HandlerRegistration addRemoveHandler(RemoveHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, RemoveEvent.getType());
     }
@@ -607,6 +644,9 @@ public class Sortable extends JuiWrapper {
         RemoveEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered during sorting.
+     */
     public HandlerRegistration addSortHandler(SortHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, SortEvent.getType());
     }
@@ -615,6 +655,9 @@ public class Sortable extends JuiWrapper {
         SortEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered when sorting starts.
+     */
     public HandlerRegistration addStartHandler(StartHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, StartEvent.getType());
     }
@@ -623,6 +666,9 @@ public class Sortable extends JuiWrapper {
         StartEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered when sorting has stopped.
+     */
     public HandlerRegistration addStopHandler(StopHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, StopEvent.getType());
     }
@@ -631,6 +677,10 @@ public class Sortable extends JuiWrapper {
         StopEvent.fire(this, new SortableHash(hash), event);
     }
 
+    /**
+     * This event is triggered when the user stopped
+     * sorting and the DOM position has changed.
+     */
     public HandlerRegistration addUpdateHandler(UpdateHandler<Sortable, SortableHash> handler) {
         return addHandler(handler, UpdateEvent.getType());
     }

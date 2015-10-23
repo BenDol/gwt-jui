@@ -18,6 +18,7 @@ package nz.co.doltech.gwtjui.core.client;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import nz.co.doltech.gwtjui.core.client.js.JsArrayUtil;
 import nz.co.doltech.gwtjui.core.client.js.JsFunction;
@@ -37,6 +38,10 @@ public class JuiQuery extends Wrapper {
 
     public static JuiQuery $(Element e) {
         return new JuiQuery(e);
+    }
+
+    public static JuiQuery $(UIObject uiObject) {
+        return new JuiQuery(uiObject.getElement());
     }
 
     public static JuiQuery $(String selector) {
@@ -260,5 +265,89 @@ public class JuiQuery extends Wrapper {
      */
     public static native String trim(String str) /*-{
         return $wnd.jQuery.trim(str);
+    }-*/;
+
+    /**
+     * Set one or more attributes for the set of matched elements.
+     */
+    public Element attr(String attr) {
+        return attr(getElement(), attr);
+    }
+
+    /**
+     * Get the value of an attribute for the first element in the set of matched elements.
+     */
+    public native Element attr(Element e, String attr) /*-{
+        return $wnd.jQuery(e).attr(attr);
+    }-*/;
+
+    /**
+     * Set one or more attributes for the set of matched elements.
+     */
+    public JuiQuery attr(String attr, String value) {
+        attr(getElement(), attr, value);
+        return this;
+    }
+
+    /**
+     * Set one or more attributes for the set of matched elements.
+     */
+    public native void attr(Element e, String attr, String value) /*-{
+        $wnd.jQuery(e).attr(attr, value);
+    }-*/;
+
+    /**
+     * Remove an attribute from each element in the set of matched elements.
+     */
+    public JuiQuery removeAttr(String attr) {
+        removeAttr(getElement(), attr);
+        return this;
+    }
+
+    /**
+     * Remove an attribute from each element in the set of matched elements.
+     */
+    public native void removeAttr(Element e, String attr) /*-{
+        $wnd.jQuery(e).removeAttr(attr);
+    }-*/;
+
+    /**
+     * Remove a property for the set of matched elements.
+     */
+    public JuiQuery removeProp(String propertyName) {
+        removeProp(getElement(), propertyName);
+        return this;
+    }
+
+    /**
+     * Remove a property for the set of matched elements.
+     */
+    public native void removeProp(Element e, String propertyName) /*-{
+        $wnd.jQuery(e).removeProp(propertyName);
+    }-*/;
+
+    /**
+     * Bind an event handler to the "submit" JavaScript event,
+     * or trigger that event on an element.
+     */
+    public JuiQuery submit() {
+        return submit(JsFunction.blank());
+    }
+
+    /**
+     * Bind an event handler to the "submit" JavaScript event,
+     * or trigger that event on an element.
+     */
+    public JuiQuery submit(JsFunction jsFunction) {
+        submit(getElement(), jsFunction.asJavaScript());
+        return this;
+    }
+
+    /**
+     * Bind an event handler to the "submit" JavaScript event,
+     * or trigger that event on an element.
+     */
+    public native void submit(Element e, JavaScriptObject jso) /*-{
+        $wnd.jQuery(e).submit(jso);
     }-*/;
 }
