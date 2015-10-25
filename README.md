@@ -1,3 +1,70 @@
-# gwt-jui [![Build Status](https://travis-ci.org/BenDol/gwt-jui.svg?branch=master)](https://travis-ci.org/BenDol/gwt-jui)
+# GwtJui [![Build Status](https://travis-ci.org/BenDol/gwt-jui.svg?branch=master)](https://travis-ci.org/BenDol/gwt-jui)
 
-GWT JQueryUI Wrapper
+GwtJui is a JQueryUI Wrapper for Google Web Toolkit. The objective of this library is to provide easy access to the already existing [JQueryUI](http://jqueryui.com/) Javascript library.
+
+## Getting Started
+GwtJui is broken down into 5 subprojects to allow you as the developer to choose the JQuery libraries required. The subprojects are as follows:
+* [UI Core](http://api.jqueryui.com/category/ui-core/) (Required by all)
+* [Interactions](http://api.jqueryui.com/category/interactions/) (Semi-completed)
+* [Widgets](http://api.jqueryui.com/category/widgets/) (Coming soon)
+* [Effects](http://api.jqueryui.com/category/effects/) (Coming soon)
+* [Themes](http://jqueryui.com/themeroller/) (Started)
+
+An example using GwtJui is to add the subproject dependecy or dependencies you require.
+```xml
+<dependency>
+    <groupId>nz.co.doltech</groupId>
+    <artifactId>gwt-jui-interactions</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+
+<dependency>
+    <groupId>nz.co.doltech</groupId>
+    <artifactId>gwt-jui-themes</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+Since all projects require the [core](https://github.com/BenDol/gwt-jui/tree/master/jui-core) module it is automatically inherited for you.
+
+Now that you have the dependency in your project you can add them to your GWT module.
+```xml
+<!-- Standard use of Interactions -->
+<inherits name="nz.co.doltech.gwtjui.interactions.JuiInteractions" />
+```
+or you can import the module with more extensive information for debugging.
+```xml
+<!-- Debugging of Interactions, providing non-minified js/css -->
+<inherits name="nz.co.doltech.gwtjui.interactions.JuiInteractionsDebug" />
+```
+Note that the default `Jui` modules assume you have JQuery library already loaded, to make GwtJui load JQuery you can add the following module:
+```xml
+<!-- Loads JQuery for you -->
+<inherits name="nz.co.doltech.gwtjui.core.JuiWithJQuery" />
+
+<!-- Or, same thing for Debugging -->
+<inherits name="nz.co.doltech.gwtjui.core.JuiDebugWithJQuery" />
+```
+
+now, perhaps you would also like to have a JQuery theme too, you can use them like so:
+```java
+<inherits name="nz.co.doltech.gwtjui.themes.uilightness.UiLightness" />
+```
+
+**Loading is done asynchronously**
+which mean there can be cases where the library doesn't load in time, this is because to ensure all its dependencies have loaded it is done asynchronously. This allows us to keep the amount of javascript to a minimum, rather than compiling code you don't need.
+
+To resolve this is easy, you can do the following in your GWT `EntryPoint`:
+```java
+InteractionsEntryPoint.asDependency().whenLoaded(new Dependency.WhenLoaded() {
+    @Override
+    public void onLoaded() {
+        // Interactions and all its dependecies have been loaded!
+    }
+});
+```
+
+## Issues
+If you find any issues please list them in the [issue tracker](https://github.com/BenDol/gwt-jui/issues) and it will be looked into as soon as possible.
+
+## Contributing
+TODO
