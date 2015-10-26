@@ -13,35 +13,36 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client.util;
+package nz.co.doltech.gwtjui.interactions.client.options;
 
 import com.google.gwt.dom.client.Style;
 
-public enum Axis implements Style.HasCssName {
-    X {
+public enum SnapMode implements Style.HasCssName {
+    INNER {
         @Override
         public String getCssName() {
-            return "x";
+            return "inner";
         }
     },
-    Y {
+    OUTER {
         @Override
         public String getCssName() {
-            return "y";
+            return "outer";
+        }
+    },
+    BOTH {
+        @Override
+        public String getCssName() {
+            return "both";
         }
     };
     @Override
     public abstract String getCssName();
 
-    public static Axis fromCssName(String cssName) {
-        for(Axis t : values()) {
+    public static SnapMode fromCssName(String cssName) {
+        for(SnapMode t : values()) {
             if(t.getCssName().equals(cssName)) { return t; }
         }
         return null;
-    }
-
-    @Override
-    public String toString() {
-        return getCssName();
     }
 }

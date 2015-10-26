@@ -13,17 +13,29 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client.events;
-
-import com.google.gwt.event.shared.EventHandler;
-import nz.co.doltech.gwtjui.core.client.JuiWrapper;
-import nz.co.doltech.gwtjui.core.client.base.EventHash;
+package nz.co.doltech.gwtjui.core.client.util;
 
 /**
- * This event is triggered during sorting.
- *
- * @author Ben Dol
+ * A mapping of key code descriptions to their numeric values.
  */
-public interface SortHandler<T extends JuiWrapper, H extends EventHash> extends EventHandler {
-    void onSort(SortEvent<T, H> event);
+public enum KeyCode {
+    BACKSPACE(8),
+    COMMA(188),
+    DELETE(46),
+    DOWN(40),
+    END(35),
+    ENTER(13),
+    ESCAPE(27),
+    HOME(36),
+    LEFT(37),
+    PAGE_DOWN(34),
+    PAGE_UP(33),
+    PERIOD(190),
+    RIGHT(39),
+    SPACE(32),
+    TAB(9),
+    UP(38);
+
+    int code;
+    KeyCode(int code) { this.code = code; }
 }

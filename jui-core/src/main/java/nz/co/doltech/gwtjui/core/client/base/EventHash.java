@@ -15,7 +15,5 @@
  */
 package nz.co.doltech.gwtjui.core.client.base;
 
-import nz.co.doltech.gwtjui.core.client.base.FromJavaScriptObject;
-
 public interface EventHash extends FromJavaScriptObject {
 }

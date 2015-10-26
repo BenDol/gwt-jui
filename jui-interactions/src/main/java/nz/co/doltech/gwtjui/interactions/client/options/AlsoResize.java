@@ -13,17 +13,25 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.test.client;
+package nz.co.doltech.gwtjui.interactions.client.options;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-import nz.co.doltech.gwtjui.core.client.base.Dependency;
-import nz.co.doltech.gwtjui.interactions.client.InteractionsEntryPoint;
+import com.google.gwt.dom.client.Element;
+import nz.co.doltech.gwtjui.core.client.base.MultiTypeOption;
 
-public class TestEntryPoint implements EntryPoint {
+public class AlsoResize implements MultiTypeOption {
+    private String selector;
+    private Element element;
+
+    public AlsoResize(String selector) {
+        this.selector = selector;
+    }
+
+    public AlsoResize(Element element) {
+        this.element = element;
+    }
 
     @Override
-    public void onModuleLoad() {
-        RootPanel.get().add(new SortableTest());
+    public Object get() {
+        return selector != null ? selector : element;
     }
 }

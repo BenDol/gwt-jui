@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.core.client.events;
+package nz.co.doltech.gwtjui.interactions.client.events;
 
 import com.google.gwt.user.client.Event;
 import nz.co.doltech.gwtjui.core.client.JuiWrapper;
@@ -21,34 +21,35 @@ import nz.co.doltech.gwtjui.core.client.base.EventHash;
 import nz.co.doltech.gwtjui.core.client.base.JuiHashEvent;
 
 /**
- * This event is triggered during sorting.
+ * This event is triggered when the user stopped
+ * sorting and the DOM position has changed.
  *
  * @author Ben Dol
  */
 @SuppressWarnings({"unchecked"})
-public class SortEvent<T extends JuiWrapper, H extends EventHash> extends JuiHashEvent<T, H, SortHandler> {
+public class SelectingEvent<T extends JuiWrapper, H extends EventHash> extends JuiHashEvent<T, H, SelectingHandler> {
 
     public static <T extends JuiWrapper, H extends EventHash> void fire(T source, H hash, Event nativeEvent) {
-        source.fireEvent(new SortEvent<T, H>(source, hash, nativeEvent));
+        source.fireEvent(new SelectingEvent<T, H>(source, hash, nativeEvent));
     }
 
-    private static final Type<SortHandler> TYPE = new Type<>();
+    private static final Type<SelectingHandler> TYPE = new Type<>();
 
-    public static Type<SortHandler> getType() {
+    public static Type<SelectingHandler> getType() {
         return TYPE;
     }
 
-    private SortEvent(T source, H hash, Event nativeEvent) {
+    private SelectingEvent(T source, H hash, Event nativeEvent) {
         super(source, hash, nativeEvent);
     }
 
     @Override
-    public Type<SortHandler> getAssociatedType() {
+    public Type<SelectingHandler> getAssociatedType() {
         return (Type) TYPE;
     }
 
     @Override
-    protected void dispatch(final SortHandler handler) {
-        handler.onSort(this);
+    protected void dispatch(final SelectingHandler handler) {
+        handler.onSelecting(this);
     }
 }

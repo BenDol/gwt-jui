@@ -19,6 +19,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.Widget;
 import nz.co.doltech.gwtjui.core.client.base.IsJavaScriptObject;
+import nz.co.doltech.gwtjui.core.client.base.MultiTypeOption;
 
 public abstract class JuiWrapper extends JuiQuery {
 
@@ -36,7 +37,7 @@ public abstract class JuiWrapper extends JuiQuery {
 
     protected abstract void command(Element e, Object command);
 
-    protected abstract String getOption(Element e, String option);
+    protected abstract <I> I getOption(Element e, String option);
 
     protected abstract void setOption(Element e, String option, Object value);
 
@@ -60,7 +61,7 @@ public abstract class JuiWrapper extends JuiQuery {
         command(getElement(), command);
     }
 
-    protected String getOption(String option) {
+    protected <I> I getOption(String option) {
         return getOption(getElement(), option);
     }
 
@@ -76,6 +77,12 @@ public abstract class JuiWrapper extends JuiQuery {
         setOption(getElement(), option, value.getCssName());
     }
 
+    protected void setOption(String option, MultiTypeOption value) {
+        setOption(getElement(), option, value.get());
+    }
+
+    // Core Methods
+
     /**
      * Disable selection of text content within the set of matched elements.
      */
@@ -88,6 +95,17 @@ public abstract class JuiWrapper extends JuiQuery {
     }-*/;
 
     /**
+     * Enable selection of text content within the set of matched elements.
+     */
+    public void enableSelection() {
+        disableSelection(getElement());
+    }
+
+    public native void enableSelection(Element e) /*-{
+        $wnd.jQuery(e).enableSelection();
+    }-*/;
+
+    /**
      * Selects elements which have data stored under the specified key.
      */
     public void data(String key, Object value) {
@@ -96,5 +114,72 @@ public abstract class JuiWrapper extends JuiQuery {
 
     public native void data(Element e, String key, Object value) /*-{
         $wnd.jQuery(e).data(key, value);
+    }-*/;
+
+    /**
+     * Asynchronously set focus to an element.
+     */
+    public void focus(int delay) {
+        focus(getElement(), delay);
+    }
+
+    public native void focus(Element e, int delay) /*-{
+        $wnd.jQuery(e).focus();
+    }-*/;
+
+    /**
+     * Remove ids that were set by .uniqueId() for the set of
+     * matched elements.
+     */
+    public void removeUniqueId() {
+        removeUniqueId(getElement());
+    }
+
+    public native void removeUniqueId(Element e) /*-{
+        $wnd.jQuery(e).removeUniqueId();
+    }-*/;
+
+    /**
+     * Get the closest ancestor element that is scrollable.
+     */
+    public void scrollParent() {
+        scrollParent(getElement());
+    }
+
+    public native void scrollParent(Element e) /*-{
+        $wnd.jQuery(e).scrollParent();
+    }-*/;
+
+    /**
+     * Generate and apply a unique id for the set of matched elements.
+     */
+    public void uniqueId() {
+        uniqueId(getElement());
+    }
+
+    public native void uniqueId(Element e) /*-{
+        $wnd.jQuery(e).uniqueId();
+    }-*/;
+
+    /**
+     * Get the z-index for an element.
+     */
+    public int zIndex() {
+        return zIndex(getElement());
+    }
+
+    public native int zIndex(Element e) /*-{
+        return $wnd.jQuery(e).zIndex();
+    }-*/;
+
+    /**
+     * Set the z-index for an element.
+     */
+    public void zIndex(int zIndex) {
+        zIndex(getElement(), zIndex);
+    }
+
+    public native void zIndex(Element e, int zIndex) /*-{
+        $wnd.jQuery(e).zIndex(zIndex);
     }-*/;
 }

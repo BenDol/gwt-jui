@@ -13,23 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.interactions.client.util;
+package nz.co.doltech.gwtjui.interactions.client.events;
 
-import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.shared.EventHandler;
+import nz.co.doltech.gwtjui.core.client.JuiWrapper;
+import nz.co.doltech.gwtjui.core.client.base.EventHash;
 
-public enum Tolerance implements Style.HasCssName {
-    INTERSECT {
-        @Override
-        public String getCssName() {
-            return "intersect";
-        }
-    },
-    POINTER {
-        @Override
-        public String getCssName() {
-            return "pointer";
-        }
-    };
-    @Override
-    public abstract String getCssName();
+/**
+ * Triggered at the end of the select operation,
+ * on each element added to the selection.
+ *
+ * @author Ben Dol
+ */
+public interface SelectedHandler<T extends JuiWrapper, H extends EventHash> extends EventHandler {
+    void onSelected(SelectedEvent<T, H> event);
 }

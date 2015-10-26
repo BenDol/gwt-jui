@@ -13,17 +13,28 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.test.client;
+package nz.co.doltech.gwtjui.core.client.util;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-import nz.co.doltech.gwtjui.core.client.base.Dependency;
-import nz.co.doltech.gwtjui.interactions.client.InteractionsEntryPoint;
+import com.google.gwt.dom.client.Style;
 
-public class TestEntryPoint implements EntryPoint {
+public enum Speed implements Style.HasCssName {
+    SLOW {
+        @Override
+        public String getCssName() {
+            return "slow";
+        }
+    },
+    FAST {
+        @Override
+        public String getCssName() {
+            return "fast";
+        }
+    };
+    @Override
+    public abstract String getCssName();
 
     @Override
-    public void onModuleLoad() {
-        RootPanel.get().add(new SortableTest());
+    public String toString() {
+        return getCssName();
     }
 }

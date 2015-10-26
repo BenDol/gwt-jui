@@ -16,24 +16,22 @@
 package nz.co.doltech.gwtjui.test.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import nz.co.doltech.gwtjui.core.client.JuiQuery;
 import nz.co.doltech.gwtjui.core.client.events.ChangeEvent;
 import nz.co.doltech.gwtjui.core.client.events.ChangeHandler;
 import nz.co.doltech.gwtjui.core.client.events.OverEvent;
 import nz.co.doltech.gwtjui.core.client.events.OverHandler;
 import nz.co.doltech.gwtjui.core.client.events.ReceiveEvent;
 import nz.co.doltech.gwtjui.core.client.events.ReceiveHandler;
-import nz.co.doltech.gwtjui.core.client.events.SortEvent;
-import nz.co.doltech.gwtjui.core.client.events.SortHandler;
+import nz.co.doltech.gwtjui.interactions.client.events.SortEvent;
+import nz.co.doltech.gwtjui.interactions.client.events.SortHandler;
 import nz.co.doltech.gwtjui.core.client.events.UpdateEvent;
 import nz.co.doltech.gwtjui.core.client.events.UpdateHandler;
 import nz.co.doltech.gwtjui.interactions.client.ui.Sortable;
-import nz.co.doltech.gwtjui.interactions.client.util.SortableHash;
+import nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash;
 
 import static nz.co.doltech.gwtjui.core.client.JuiQuery.$;
 

@@ -13,17 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.test.client;
+package nz.co.doltech.gwtjui.core.client.util;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-import nz.co.doltech.gwtjui.core.client.base.Dependency;
-import nz.co.doltech.gwtjui.interactions.client.InteractionsEntryPoint;
+import com.google.gwt.dom.client.Style;
 
-public class TestEntryPoint implements EntryPoint {
+public class CursorUtil {
 
-    @Override
-    public void onModuleLoad() {
-        RootPanel.get().add(new SortableTest());
+    public static Style.Cursor fromCssName(String cssName) {
+        for(Style.Cursor cursor : Style.Cursor.values()) {
+            if(cursor.getCssName().equals(cssName)) {
+                return cursor;
+            }
+        }
+        return Style.Cursor.AUTO;
     }
 }

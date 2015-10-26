@@ -13,23 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.interactions.client.util;
+package nz.co.doltech.gwtjui.interactions.client.events;
 
-import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.shared.EventHandler;
+import nz.co.doltech.gwtjui.core.client.JuiWrapper;
+import nz.co.doltech.gwtjui.core.client.base.EventHash;
 
-public enum HelpType implements Style.HasCssName {
-    ORIGINAL {
-        @Override
-        public String getCssName() {
-            return "original";
-        }
-    },
-    CLONE {
-        @Override
-        public String getCssName() {
-            return "clone";
-        }
-    };
-    @Override
-    public abstract String getCssName();
+/**
+ * Triggered while the mouse is moved during the dragging,
+ * immediately before the current move happens.
+ *
+ * @author Ben Dol
+ */
+public interface DropHandler<T extends JuiWrapper, H extends EventHash> extends EventHandler {
+    void onDrop(DropEvent<T, H> event);
 }

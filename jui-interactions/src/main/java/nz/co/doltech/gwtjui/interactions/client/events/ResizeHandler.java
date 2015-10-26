@@ -13,17 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.test.client;
+package nz.co.doltech.gwtjui.interactions.client.events;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-import nz.co.doltech.gwtjui.core.client.base.Dependency;
-import nz.co.doltech.gwtjui.interactions.client.InteractionsEntryPoint;
+import com.google.gwt.event.shared.EventHandler;
+import nz.co.doltech.gwtjui.core.client.JuiWrapper;
+import nz.co.doltech.gwtjui.core.client.base.EventHash;
 
-public class TestEntryPoint implements EntryPoint {
-
-    @Override
-    public void onModuleLoad() {
-        RootPanel.get().add(new SortableTest());
-    }
+/**
+ * This event is triggered during the resize, on the drag of the resize handler.
+ *
+ * @author Ben Dol
+ */
+public interface ResizeHandler<T extends JuiWrapper, H extends EventHash> extends EventHandler {
+    void onResize(ResizeEvent<T, H> event);
 }

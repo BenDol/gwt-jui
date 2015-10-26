@@ -13,17 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.test.client;
+package nz.co.doltech.gwtjui.interactions.client.options;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-import nz.co.doltech.gwtjui.core.client.base.Dependency;
-import nz.co.doltech.gwtjui.interactions.client.InteractionsEntryPoint;
+import nz.co.doltech.gwtjui.core.client.base.MultiTypeOption;
 
-public class TestEntryPoint implements EntryPoint {
+public class Snap implements MultiTypeOption {
+    private Boolean autoSnap;
+    private String selector;
+
+    public Snap(Boolean autoSnap) {
+        this.autoSnap = autoSnap;
+    }
+
+    public Snap(String selector) {
+        this.selector = selector;
+    }
 
     @Override
-    public void onModuleLoad() {
-        RootPanel.get().add(new SortableTest());
+    public Object get() {
+        return selector != null ? selector : autoSnap;
     }
 }

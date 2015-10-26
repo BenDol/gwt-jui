@@ -13,17 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.test.client;
+package nz.co.doltech.gwtjui.interactions.client.options;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-import nz.co.doltech.gwtjui.core.client.base.Dependency;
-import nz.co.doltech.gwtjui.interactions.client.InteractionsEntryPoint;
+import nz.co.doltech.gwtjui.core.client.base.MultiTypeOption;
+import nz.co.doltech.gwtjui.core.client.js.JsFunction;
+import nz.co.doltech.gwtjui.core.client.util.Speed;
 
-public class TestEntryPoint implements EntryPoint {
+public class AnimateDuration implements MultiTypeOption {
+    private Double duration;
+    private Speed speed;
+
+    public AnimateDuration(Double duration) {
+        this.duration = duration;
+    }
+
+    public AnimateDuration(Speed speed) {
+        this.speed = speed;
+    }
 
     @Override
-    public void onModuleLoad() {
-        RootPanel.get().add(new SortableTest());
+    public Object get() {
+        return duration != null ? duration : speed.getCssName();
     }
 }

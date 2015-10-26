@@ -13,17 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.test.client;
+package nz.co.doltech.gwtjui.core.client.base;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-import nz.co.doltech.gwtjui.core.client.base.Dependency;
-import nz.co.doltech.gwtjui.interactions.client.InteractionsEntryPoint;
+public interface MultiTypeOption {
 
-public class TestEntryPoint implements EntryPoint {
-
-    @Override
-    public void onModuleLoad() {
-        RootPanel.get().add(new SortableTest());
-    }
+    Object get();
 }

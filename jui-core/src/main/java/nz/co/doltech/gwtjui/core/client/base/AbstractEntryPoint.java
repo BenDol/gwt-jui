@@ -35,23 +35,21 @@ public abstract class AbstractEntryPoint<T extends AbstractEntryPoint> implement
     public void onModuleLoad() {
         final DependencySet<T> dependencies = setupDependencies();
         if(dependencies != null) {
-            Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
-                private int tries = 0;
-                @Override
-                public boolean execute() {
-                    tries++;
-                    if(tries > 1000) {
-                        logger.warning("Dependencies are taking an abnormally " +
-                            "long time to load: " + dependencies);
-                    }
+            if(dependencies.contains(getDependency())) {
+                throw new IllegalStateException("Cannot define itself as its own dependency: "
+                    + getDependency().getName());
+            }
 
-                    boolean ready = dependencies.isReady();
-                    if(ready) {
-                        AbstractEntryPoint.this.invokeLoad();
+            for(Dependency dependency : dependencies) {
+                dependency.whenLoaded(new Dependency.WhenLoaded() {
+                    @Override
+                    public void onLoaded() {
+                        if(dependencies.isReady()) {
+                            AbstractEntryPoint.this.invokeLoad();
+                        }
                     }
-                    return !ready;
-                }
-            }, 40);
+                });
+            }
         } else {
             invokeLoad();
         }

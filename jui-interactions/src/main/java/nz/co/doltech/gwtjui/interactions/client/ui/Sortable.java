@@ -16,14 +16,15 @@
 package nz.co.doltech.gwtjui.interactions.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import nz.co.doltech.gwtjui.core.client.JuiWrapper;
-import nz.co.doltech.gwtjui.core.client.js.JsFunction;
+import nz.co.doltech.gwtjui.core.client.events.hash.EmptyHash;
 import nz.co.doltech.gwtjui.core.client.util.At;
 import nz.co.doltech.gwtjui.core.client.util.Axis;
 import nz.co.doltech.gwtjui.core.client.js.JsPoint;
@@ -45,75 +46,73 @@ import nz.co.doltech.gwtjui.core.client.events.ReceiveEvent;
 import nz.co.doltech.gwtjui.core.client.events.ReceiveHandler;
 import nz.co.doltech.gwtjui.core.client.events.RemoveEvent;
 import nz.co.doltech.gwtjui.core.client.events.RemoveHandler;
-import nz.co.doltech.gwtjui.core.client.events.SortEvent;
-import nz.co.doltech.gwtjui.core.client.events.SortHandler;
+import nz.co.doltech.gwtjui.interactions.client.base.UsesMouseLayer;
+import nz.co.doltech.gwtjui.interactions.client.events.SortEvent;
+import nz.co.doltech.gwtjui.interactions.client.events.SortHandler;
 import nz.co.doltech.gwtjui.core.client.events.StartEvent;
 import nz.co.doltech.gwtjui.core.client.events.StartHandler;
 import nz.co.doltech.gwtjui.core.client.events.StopEvent;
 import nz.co.doltech.gwtjui.core.client.events.StopHandler;
 import nz.co.doltech.gwtjui.core.client.events.UpdateEvent;
 import nz.co.doltech.gwtjui.core.client.events.UpdateHandler;
-import nz.co.doltech.gwtjui.interactions.client.util.HelpType;
-import nz.co.doltech.gwtjui.interactions.client.util.Helper;
-import nz.co.doltech.gwtjui.interactions.client.util.SortableHash;
-import nz.co.doltech.gwtjui.interactions.client.util.Tolerance;
+import nz.co.doltech.gwtjui.interactions.client.options.Handle;
+import nz.co.doltech.gwtjui.interactions.client.options.HelpType;
+import nz.co.doltech.gwtjui.interactions.client.options.Helper;
+import nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash;
 
 /**
- * Wraps: jQuery UI Sortable
- * Version: 1.11.4
- * Website: http://jqueryui.com
- * Docs: http://api.jqueryui.com/sortable/
+ * jQuery UI Sortable
+ * <ul>
+ *   <li>Version: 1.11.4</li>
+ *   <li>Website: http://jqueryui.com</li>
+ *   <li>Docs: http://api.jqueryui.com/sortable/</li>
+ * </ul>
+ * The jQuery UI Sortable plugin makes selected elements sortable by dragging with the mouse.
  *
  * @author Ben Dol
  */
-public class Sortable extends JuiWrapper {
+public class Sortable extends JuiWrapper implements UsesMouseLayer {
 
-    // Options
-    private Element appendTo;
-    private Axis axis;
-    private String cancel;
-    private boolean refreshPositions;
-    private String connectWith;
-    private Element containment;
-    private Cursor cursor;
-    private At cursorAt;
-    private int delay;
-    private boolean disabled;
-    private double distance;
-    private boolean dropOnEmpty;
-    private boolean forceHelperSize;
-    private boolean forcePlaceholderSize;
-    private JsPoint grid;
-    private Element handle;
-    private Helper helper;
-    private String items;
-    private double opacity;
-    private String placeholder;
-    private double revert;
-    private boolean scroll;
-    private double scrollSensitivity;
-    private double scrollSpeed;
-    private Tolerance tolerance;
-    private int zIndex;
+    public enum Tolerance implements Style.HasCssName {
+        INTERSECT {
+            @Override
+            public String getCssName() {
+                return "intersect";
+            }
+        },
+        POINTER {
+            @Override
+            public String getCssName() {
+                return "pointer";
+            }
+        };
+        @Override
+        public abstract String getCssName();
+
+        public static Tolerance fromCssName(String cssName) {
+            for(Tolerance t : values()) {
+                if(t.getCssName().equals(cssName)) { return t; }
+            }
+            return null;
+        }
+    }
+
+    private MouseLayer mouseLayer;
 
     public Sortable(Element element) {
         super(element);
+        mouseLayer = new MouseLayer(element);
     }
 
     public Sortable(Widget widget) {
         super(widget);
+        mouseLayer = new MouseLayer(widget);
     }
 
-    public Sortable(Widget widget, UIObject appendTo) {
-        super(widget);
-
-        this.appendTo = appendTo.getElement();
-    }
-
-    // Setters/Getters
+    // Options
 
     public Element getAppendTo() {
-        return appendTo;
+        return getOption("appendTo");
     }
 
     /**
@@ -122,12 +121,11 @@ public class Sortable extends JuiWrapper {
      * @param appendTo parent {@link Element} to append to.
      */
     public void setAppendTo(Element appendTo) {
-        this.appendTo = appendTo;
         setOption("appendTo", appendTo);
     }
 
     public Axis getAxis() {
-        return axis;
+        return getOption("axis");
     }
 
     /**
@@ -135,12 +133,11 @@ public class Sortable extends JuiWrapper {
      * or vertically. Possible values: "x", "y".
      */
     public void setAxis(Axis axis) {
-        this.axis = axis;
         setOption("axis", axis);
     }
 
     public String getCancel() {
-        return cancel;
+        return getOption("cancel");
     }
 
     /**
@@ -149,12 +146,11 @@ public class Sortable extends JuiWrapper {
      * @param cancel selector text.
      */
     public void setCancel(String cancel) {
-        this.cancel = cancel;
         setOption("cancel", cancel);
     }
 
     public boolean getRefreshPositions() {
-        return refreshPositions;
+        return getOption("refreshPositions");
     }
 
     /**
@@ -162,12 +158,11 @@ public class Sortable extends JuiWrapper {
      * Calling this method refreshes the cached item positions of all sortables.
      */
     public void setRefreshPositions(boolean refreshPositions) {
-        this.refreshPositions = refreshPositions;
         setOption("refreshPositions", refreshPositions);
     }
 
     public String getConnectWith() {
-        return connectWith;
+        return getOption("connectWith");
     }
 
     /**
@@ -178,12 +173,11 @@ public class Sortable extends JuiWrapper {
      * @param connectWith selector text.
      */
     public void setConnectWith(String connectWith) {
-        this.connectWith = connectWith;
         setOption("cancel", connectWith);
     }
 
     public Element getContainment() {
-        return containment;
+        return getOption("containment");
     }
 
     /**
@@ -196,12 +190,11 @@ public class Sortable extends JuiWrapper {
      * @param containment containment {@link Element}.
      */
     public void setContainment(Element containment) {
-        this.containment = containment;
         setOption("containment", containment);
     }
 
     public Cursor getCursor() {
-        return cursor;
+        return getOption("cursor");
     }
 
     /**
@@ -210,12 +203,11 @@ public class Sortable extends JuiWrapper {
      * @param cursor cursor type.
      */
     public void setCursor(Cursor cursor) {
-        this.cursor = cursor;
         setOption("cursor", cursor);
     }
 
     public At getCursorAt() {
-        return cursorAt;
+        return ((JavaScriptObject)getOption("cursorAt")).cast();
     }
 
     /**
@@ -225,12 +217,11 @@ public class Sortable extends JuiWrapper {
      * @param cursorAt positional {@link At} movements.
      */
     public void setCursorAt(At cursorAt) {
-        this.cursorAt = cursorAt;
         setOption("cursorAt", cursorAt);
     }
 
     public int getDelay() {
-        return delay;
+        return getOption("delay");
     }
 
     /**
@@ -240,12 +231,11 @@ public class Sortable extends JuiWrapper {
      * @param delay interval in milliseconds.
      */
     public void setDelay(int delay) {
-        this.delay = delay;
         setOption("delay", delay);
     }
 
     public boolean isDisabled() {
-        return disabled;
+        return getOption("disabled");
     }
 
     /**
@@ -253,12 +243,11 @@ public class Sortable extends JuiWrapper {
      * Default: false.
      */
     public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
         setOption("disabled", disabled);
     }
 
     public double getDistance() {
-        return distance;
+        return getOption("distance");
     }
 
     /**
@@ -268,12 +257,11 @@ public class Sortable extends JuiWrapper {
      * Default: 1
      */
     public void setDistance(double distance) {
-        this.distance = distance;
         setOption("distance", distance);
     }
 
     public boolean isDropOnEmpty() {
-        return dropOnEmpty;
+        return getOption("dropOnEmpty");
     }
 
     /**
@@ -282,36 +270,34 @@ public class Sortable extends JuiWrapper {
      * Default: true
      */
     public void setDropOnEmpty(boolean dropOnEmpty) {
-        this.dropOnEmpty = dropOnEmpty;
         setOption("dropOnEmpty", dropOnEmpty);
     }
 
     public boolean isForceHelperSize() {
-        return forceHelperSize;
+        return getOption("forceHelperSize");
     }
 
     /**
      * If true, forces the helper to have a size.
      */
     public void setForceHelperSize(boolean forceHelperSize) {
-        this.forceHelperSize = forceHelperSize;
         setOption("forceHelperSize", forceHelperSize);
     }
 
     public boolean isForcePlaceholderSize() {
-        return forcePlaceholderSize;
+        return getOption("forcePlaceholderSize");
     }
 
     /**
      * If true, forces the placeholder to have a size.
      */
     public void setForcePlaceholderSize(boolean forcePlaceholderSize) {
-        this.forcePlaceholderSize = forcePlaceholderSize;
         setOption("forcePlaceholderSize", forcePlaceholderSize);
     }
 
     public JsPoint getGrid() {
-        return grid;
+        JsArrayInteger array = getOption("grid");
+        return new JsPoint(array.get(0), array.get(1));
     }
 
     /**
@@ -321,47 +307,35 @@ public class Sortable extends JuiWrapper {
      * @param grid an x,y {@link JsPoint}.
      */
     public void setGrid(JsPoint grid) {
-        this.grid = grid;
         setOption("grid", grid);
     }
 
-    public Element getHandle() {
-        return handle;
+    public Object getHandle() {
+        return getOption("handle");
     }
 
     /**
      * Restricts sort start click to the specified element.
      * @param handle handler {@link Element}.
      */
-    public void setHandle(Element handle) {
-        this.handle = handle;
+    public void setHandle(Handle handle) {
         setOption("handle", handle);
     }
 
-    public Helper getHelper() {
-        return helper;
+    public Object getHelper() {
+        return getOption("helper");
     }
 
     /**
      * Allows for a helper element to be used for dragging display.<br/>
      * Default: {@link HelpType#ORIGINAL}.
      */
-    public void setHelper(HelpType helpType) {
-        this.helper = new Helper(helpType);
-        setOption("helper", helpType);
-    }
-
-    /**
-     * Allows for a helper element to be used for dragging display.<br/>
-     * Default: {@link HelpType#ORIGINAL}.
-     */
-    public void setHelper(JsFunction helper) {
-        this.helper = new Helper(helper);
+    public void setHelper(Helper helper) {
         setOption("helper", helper);
     }
 
     public String getItems() {
-        return items;
+        return getOption("items");
     }
 
     /**
@@ -369,36 +343,33 @@ public class Sortable extends JuiWrapper {
      * Default: "> *"
      */
     public void setItems(String items) {
-        this.items = items;
         setOption("items", items);
     }
 
     public double getOpacity() {
-        return opacity;
+        return getOption("opacity");
     }
 
     /**
      * Defines the opacity of the helper while sorting. From 0.01 to 1.
      */
     public void setOpacity(double opacity) {
-        this.opacity = opacity;
         setOption("opacity", opacity);
     }
 
     public String getPlaceholder() {
-        return placeholder;
+        return getOption("placeholder");
     }
 
     /**
      * A class name that gets applied to the otherwise white space.
      */
     public void setPlaceholder(String placeholder) {
-        this.placeholder = placeholder;
         setOption("placeholder", placeholder);
     }
 
     public double getRevert() {
-        return revert;
+        return getOption("revert");
     }
 
     /**
@@ -407,12 +378,11 @@ public class Sortable extends JuiWrapper {
      * Default: false
      */
     public void setRevert(double revert) {
-        this.revert = revert;
         setOption("revert", revert);
     }
 
     public boolean isScroll() {
-        return scroll;
+        return getOption("scroll");
     }
 
     /**
@@ -420,12 +390,11 @@ public class Sortable extends JuiWrapper {
      * Default: true
      */
     public void setScroll(boolean scroll) {
-        this.scroll = scroll;
         setOption("scroll", scroll);
     }
 
     public double getScrollSensitivity() {
-        return scrollSensitivity;
+        return getOption("scrollSensitivity");
     }
 
     /**
@@ -433,12 +402,11 @@ public class Sortable extends JuiWrapper {
      * Default: 20
      */
     public void setScrollSensitivity(double scrollSensitivity) {
-        this.scrollSensitivity = scrollSensitivity;
         setOption("scrollSensitivity", scrollSensitivity);
     }
 
     public double getScrollSpeed() {
-        return scrollSpeed;
+        return getOption("scrollSpeed");
     }
 
     /**
@@ -447,12 +415,11 @@ public class Sortable extends JuiWrapper {
      * Default: 20
      */
     public void setScrollSpeed(double scrollSpeed) {
-        this.scrollSpeed = scrollSpeed;
         setOption("scrollSpeed", scrollSpeed);
     }
 
     public Tolerance getTolerance() {
-        return tolerance;
+        return Tolerance.fromCssName((String) getOption("tolerance"));
     }
 
     /**
@@ -461,12 +428,11 @@ public class Sortable extends JuiWrapper {
      * Default: {@link Tolerance#INTERSECT}
      */
     public void setTolerance(Tolerance tolerance) {
-        this.tolerance = tolerance;
         setOption("tolerance", tolerance);
     }
 
     public int getzIndex() {
-        return zIndex;
+        return getOption("zIndex");
     }
 
     /**
@@ -474,7 +440,6 @@ public class Sortable extends JuiWrapper {
      * Default: 1000
      */
     public void setzIndex(int zIndex) {
-        this.zIndex = zIndex;
         setOption("zIndex", zIndex);
     }
 
@@ -531,7 +496,12 @@ public class Sortable extends JuiWrapper {
     @Override
     protected void remove(Element e) {
         destroy();
-    };
+    }
+
+    @Override
+    public MouseLayer getMouseLayer() {
+        return mouseLayer;
+    }
 
     // Events
 
@@ -574,12 +544,12 @@ public class Sortable extends JuiWrapper {
     /**
      * Triggered when the sortable is created.
      */
-    public HandlerRegistration addCreateHandler(CreateHandler<Sortable, SortableHash> handler) {
+    public HandlerRegistration addCreateHandler(CreateHandler<Sortable, EmptyHash> handler) {
         return addHandler(handler, CreateEvent.getType());
     }
 
     private void onCreate(Event event, JavaScriptObject hash) {
-        CreateEvent.fire(this, new SortableHash(hash), event);
+        CreateEvent.fire(this, new EmptyHash(hash), event);
     }
 
     /**
@@ -704,6 +674,9 @@ public class Sortable extends JuiWrapper {
             change: function(e, ui) {
                 that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onChange(*)(e, ui);
             },
+            create: function(e, ui) {
+                that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onCreate(*)(e, ui);
+            },
             deactivate: function(e, ui) {
                 that.@nz.co.doltech.gwtjui.interactions.client.ui.Sortable::onDeactivate(*)(e, ui);
             },
@@ -735,7 +708,7 @@ public class Sortable extends JuiWrapper {
     }-*/;
 
     @Override
-    protected native String getOption(Element e, String option) /*-{
+    protected native <I> I getOption(Element e, String option) /*-{
         return $wnd.jQuery(e).sortable("option", option);
     }-*/;
 

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.interactions.client.util;
+package nz.co.doltech.gwtjui.interactions.client.events.hash;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
@@ -105,19 +105,19 @@ public class SortableHash implements EventHash {
     @Override
     public native void fromJavaScriptObject(JavaScriptObject jso) /*-{
         if(jso.helper !== null) {
-            this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::helper = jso.helper[0];
+            this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::helper = jso.helper[0];
         }
         if(jso.item !== null) {
-            this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::item = jso.item[0];
+            this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::item = jso.item[0];
         }
         if(jso.placeholder !== null) {
-            this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::placeholder = jso.placeholder[0];
+            this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::placeholder = jso.placeholder[0];
         }
         if(jso.sender !== null) {
-            this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::sender = jso.sender[0];
+            this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::sender = jso.sender[0];
         }
-        this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::setOffset(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.offset);
-        this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::setOriginalPos(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.originalPosition);
-        this.@nz.co.doltech.gwtjui.interactions.client.util.SortableHash::setPos(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.position);
+        this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::setOffset(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.offset);
+        this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::setOriginalPos(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.originalPosition);
+        this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::setPos(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.position);
     }-*/;
 }

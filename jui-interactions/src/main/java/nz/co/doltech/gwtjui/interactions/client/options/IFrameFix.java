@@ -13,17 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.test.client;
+package nz.co.doltech.gwtjui.interactions.client.options;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-import nz.co.doltech.gwtjui.core.client.base.Dependency;
-import nz.co.doltech.gwtjui.interactions.client.InteractionsEntryPoint;
+import nz.co.doltech.gwtjui.core.client.base.MultiTypeOption;
 
-public class TestEntryPoint implements EntryPoint {
+public class IFrameFix implements MultiTypeOption {
+    private Boolean enabled;
+    private String selector;
+
+    public IFrameFix(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public IFrameFix(String selector) {
+        this.selector = selector;
+    }
 
     @Override
-    public void onModuleLoad() {
-        RootPanel.get().add(new SortableTest());
+    public Object get() {
+        return enabled != null ? enabled : selector;
     }
 }

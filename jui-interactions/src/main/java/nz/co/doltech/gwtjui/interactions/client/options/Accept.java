@@ -13,26 +13,25 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.interactions.client.util;
+package nz.co.doltech.gwtjui.interactions.client.options;
 
+import nz.co.doltech.gwtjui.core.client.base.MultiTypeOption;
 import nz.co.doltech.gwtjui.core.client.js.JsFunction;
 
-public class Helper {
+public class Accept implements MultiTypeOption {
+    private String selector;
+    private JsFunction jsFunction;
 
-    private final HelpType helpType;
-    private final JsFunction callback;
-
-    public Helper(HelpType helpType) {
-        this.helpType = helpType;
-        callback = null;
+    public Accept(String selector) {
+        this.selector = selector;
     }
 
-    public Helper(JsFunction callback) {
-        this.callback = callback;
-        helpType = HelpType.ORIGINAL;
+    public Accept(JsFunction jsFunction) {
+        this.jsFunction = jsFunction;
     }
 
+    @Override
     public Object get() {
-        return callback != null ? callback : helpType;
+        return selector != null ? selector : jsFunction;
     }
 }
