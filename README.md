@@ -4,11 +4,11 @@ GwtJui is a JQueryUI Wrapper for Google Web Toolkit. The objective of this libra
 
 ## Getting Started
 GwtJui is broken down into 5 subprojects to allow you as the developer to choose the JQuery libraries required. The subprojects are as follows:
-* [UI Core](http://api.jqueryui.com/category/ui-core/) (Required by all)
-* [Interactions](http://api.jqueryui.com/category/interactions/) (Semi-completed)
-* [Widgets](http://api.jqueryui.com/category/widgets/) (Coming soon)
-* [Effects](http://api.jqueryui.com/category/effects/) (Coming soon)
-* [Themes](http://jqueryui.com/themeroller/) (Started)
+* ![completed](http://png.findicons.com/files/icons/1588/farm_fresh_web/16/tick.png) [UI Core](http://api.jqueryui.com/category/ui-core/)
+* ![completed](http://png.findicons.com/files/icons/1588/farm_fresh_web/16/tick.png) [Interactions](http://api.jqueryui.com/category/interactions/)
+* ![soon](http://people.mozilla.org/~chowse/drop/amo/personas/assets/review-pending.png) [Widgets](http://api.jqueryui.com/category/widgets/)
+* ![soon](http://people.mozilla.org/~chowse/drop/amo/personas/assets/review-pending.png) [Effects](http://api.jqueryui.com/category/effects/)
+* ![soon](http://people.mozilla.org/~chowse/drop/amo/personas/assets/review-pending.png) [Themes](http://jqueryui.com/themeroller/)
 
 An example using GwtJui is to add the subproject dependecy or dependencies you require.
 ```xml
