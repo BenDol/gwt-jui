@@ -50,19 +50,6 @@ now, perhaps you would also like to have a JQuery theme too, you can use them li
 <inherits name="nz.co.doltech.gwtjui.themes.uilightness.UiLightness" />
 ```
 
-**Loading is done asynchronously**
-which mean there can be cases where the library doesn't load in time, this is because to ensure all its dependencies have loaded it is done asynchronously. This allows us to keep the amount of javascript to a minimum, rather than compiling code you don't need.
-
-To resolve this is easy, you can do the following in your GWT `EntryPoint`:
-```java
-InteractionsEntryPoint.asDependency().whenLoaded(new Dependency.WhenLoaded() {
-    @Override
-    public void onLoaded() {
-        // Interactions and all its dependecies have been loaded!
-    }
-});
-```
-
 ## Issues
 If you find any issues please list them in the [issue tracker](https://github.com/BenDol/gwt-jui/issues) and it will be looked into as soon as possible.
 
