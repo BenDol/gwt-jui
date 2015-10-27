@@ -10,12 +10,12 @@
     <version>1.0-SNAPSHOT</version>
 
     <description>GWT JQuery Wrapper!</description>
-    <url>http://doltech.co.nz/gwt-jquery-ui</url>
+    <url>http://doltech.co.nz/gwt-jui</url>
 
     <scm>
-        <connection>scm:git:git@github.com:BenDol/gwt-jquery-ui.git</connection>
-        <developerConnection>scm:git:git@github.com:BenDol/gwt-jquery-ui.git</developerConnection>
-        <url>git@github.com:BenDol/gwt-jquery-ui.git</url>
+        <connection>scm:git:git@github.com:BenDol/gwt-jui.git</connection>
+        <developerConnection>scm:git:git@github.com:BenDol/gwt-jui.git</developerConnection>
+        <url>git@github.com:BenDol/gwt-jui.git</url>
     </scm>
 
     <licenses>
