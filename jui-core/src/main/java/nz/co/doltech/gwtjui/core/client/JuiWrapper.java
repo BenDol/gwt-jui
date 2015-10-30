@@ -76,7 +76,7 @@ public abstract class JuiWrapper extends JuiQuery {
             Object value = entry.getValue();
             try {
                 setOption(element, option, value);
-                logger.log(Level.FINE, "Successfully set failed option: " + option + " to " + value);
+                logger.fine("Successfully set failed option: '" + option + "' to '" + value + "'");
             } catch (JavaScriptException ex) {
                 failures.put(option, value);
                 logger.log(Level.FINE, "Failed to set wrapper option", ex);
