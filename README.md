@@ -2,6 +2,8 @@
 
 GwtJui is a JQueryUI Wrapper for Google Web Toolkit. The objective of this library is to provide easy access to the already existing [JQueryUI](http://jqueryui.com/) Javascript library.
 
+You can look at the current [Demo (In Progress)](http://bendol.github.io/gwt-jui-demo/snapshot)
+
 ## Getting Started
 GwtJui is broken down into 5 subprojects to allow you as the developer to choose the JQuery libraries required. The subprojects are as follows:
 * ![completed](http://png.findicons.com/files/icons/1588/farm_fresh_web/16/tick.png) [UI Core](http://api.jqueryui.com/category/ui-core/)
