@@ -16,6 +16,7 @@
 package nz.co.doltech.gwtjui.interactions.client.options;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.UIObject;
 import nz.co.doltech.gwtjui.core.client.base.MultiTypeOption;
 
 public class Handle implements MultiTypeOption {
@@ -28,6 +29,10 @@ public class Handle implements MultiTypeOption {
 
     public Handle(Element element) {
         this.element = element;
+    }
+
+    public Handle(UIObject uiObject) {
+        this(uiObject.getElement());
     }
 
     @Override

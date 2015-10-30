@@ -37,13 +37,13 @@ public class SelectableHash implements EventHash {
 
     @Override
     public native void fromJavaScriptObject(JavaScriptObject jso) /*-{
-        if(jso.selected !== null) {
+        if(jso.selected !== null && jso.selected !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SelectableHash::selected = jso.selected[0];
-        } else if(jso.selecting !== null) {
+        } else if(jso.selecting !== null && jso.selecting !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SelectableHash::selected = jso.selecting[0];
-        } else if(jso.unselected !== null) {
+        } else if(jso.unselected !== null && jso.unselected !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SelectableHash::selected = jso.unselected[0];
-        } else if(jso.unselecting !== null) {
+        } else if(jso.unselecting !== null && jso.unselecting !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SelectableHash::selected = jso.unselecting[0];
         }
     }-*/;

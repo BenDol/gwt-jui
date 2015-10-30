@@ -64,7 +64,7 @@ public class DraggableHash implements EventHash {
 
     @Override
     public native void fromJavaScriptObject(JavaScriptObject jso) /*-{
-        if(jso.helper !== null) {
+        if(jso.helper !== null && jso.helper !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.DraggableHash::helper = jso.helper[0];
         }
         this.@nz.co.doltech.gwtjui.interactions.client.events.hash.DraggableHash::setOffset(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.offset);

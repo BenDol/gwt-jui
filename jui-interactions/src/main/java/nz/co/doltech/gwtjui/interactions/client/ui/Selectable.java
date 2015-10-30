@@ -82,13 +82,20 @@ public class Selectable extends JuiWrapper implements UsesMouseLayer {
 
     private MouseLayer mouseLayer;
 
+    protected Selectable() {}
+
     public Selectable(Element element) {
         super(element);
-        mouseLayer = new MouseLayer(element);
     }
 
     public Selectable(Widget widget) {
         super(widget);
+    }
+
+    @Override
+    public void setWidget(Widget widget) {
+        super.setWidget(widget);
+
         mouseLayer = new MouseLayer(widget);
     }
 

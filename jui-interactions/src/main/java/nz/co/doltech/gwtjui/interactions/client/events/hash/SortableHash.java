@@ -104,16 +104,16 @@ public class SortableHash implements EventHash {
 
     @Override
     public native void fromJavaScriptObject(JavaScriptObject jso) /*-{
-        if(jso.helper !== null) {
+        if(jso.helper !== null && jso.helper !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::helper = jso.helper[0];
         }
-        if(jso.item !== null) {
+        if(jso.item !== null && jso.item !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::item = jso.item[0];
         }
-        if(jso.placeholder !== null) {
+        if(jso.placeholder !== null && jso.placeholder !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::placeholder = jso.placeholder[0];
         }
-        if(jso.sender !== null) {
+        if(jso.sender !== null && jso.sender !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::sender = jso.sender[0];
         }
         this.@nz.co.doltech.gwtjui.interactions.client.events.hash.SortableHash::setOffset(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.offset);

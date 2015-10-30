@@ -21,6 +21,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.Widget;
 import nz.co.doltech.gwtjui.core.client.JuiWrapper;
 import nz.co.doltech.gwtjui.core.client.events.CreateEvent;
@@ -37,6 +38,7 @@ import nz.co.doltech.gwtjui.interactions.client.base.UsesMouseLayer;
 import nz.co.doltech.gwtjui.interactions.client.events.DragEvent;
 import nz.co.doltech.gwtjui.interactions.client.events.DragHandler;
 import nz.co.doltech.gwtjui.interactions.client.events.hash.DraggableHash;
+import nz.co.doltech.gwtjui.interactions.client.options.Containment;
 import nz.co.doltech.gwtjui.interactions.client.options.Handle;
 import nz.co.doltech.gwtjui.interactions.client.options.HelpType;
 import nz.co.doltech.gwtjui.interactions.client.options.Helper;
@@ -60,13 +62,20 @@ public class Draggable extends JuiWrapper implements UsesMouseLayer {
 
     private MouseLayer mouseLayer;
 
+    protected Draggable() {}
+
     public Draggable(Element element) {
         super(element);
-        mouseLayer = new MouseLayer(element);
     }
 
     public Draggable(Widget widget) {
         super(widget);
+    }
+
+    @Override
+    public void setWidget(Widget widget) {
+        super.setWidget(widget);
+
         mouseLayer = new MouseLayer(widget);
     }
 
@@ -132,7 +141,7 @@ public class Draggable extends JuiWrapper implements UsesMouseLayer {
         setOption("connectToSortable", connectToSortable);
     }
 
-    public Element getContainment(){
+    public Object getContainment(){
         return getOption("containment");
     }
 
@@ -140,7 +149,7 @@ public class Draggable extends JuiWrapper implements UsesMouseLayer {
      * Constrains dragging to within the bounds of the specified
      * element or region.
      */
-    public void setContainment(Element containment) {
+    public void setContainment(Containment containment) {
         setOption("containment", containment);
     }
 

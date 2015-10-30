@@ -108,13 +108,13 @@ public class ResizableHash implements EventHash {
 
     @Override
     public native void fromJavaScriptObject(JavaScriptObject jso) /*-{
-        if(jso.element !== null) {
+        if(jso.element !== null && jso.element !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.ResizableHash::element = jso.element[0];
         }
-        if(jso.helper !== null) {
+        if(jso.helper !== null && jso.helper !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.ResizableHash::helper = jso.helper[0];
         }
-        if(jso.originalElement !== null) {
+        if(jso.originalElement !== null && jso.originalElement !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.ResizableHash::originalElement = jso.originalElement[0];
         }
         this.@nz.co.doltech.gwtjui.interactions.client.events.hash.ResizableHash::setOriginalPos(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.originalPosition);

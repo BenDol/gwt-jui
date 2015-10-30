@@ -55,6 +55,8 @@ import nz.co.doltech.gwtjui.interactions.client.options.Containment;
  */
 public class Resizable extends JuiWrapper {
 
+    protected Resizable() {}
+
     public Resizable(Element element) {
         super(element);
     }

@@ -91,6 +91,8 @@ public class Droppable extends JuiWrapper {
         }
     }
 
+    protected Droppable() {}
+
     public Droppable(Element element) {
         super(element);
     }

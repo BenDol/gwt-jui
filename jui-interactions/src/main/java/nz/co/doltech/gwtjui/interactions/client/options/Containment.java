@@ -16,6 +16,7 @@
 package nz.co.doltech.gwtjui.interactions.client.options;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.UIObject;
 import nz.co.doltech.gwtjui.core.client.base.MultiTypeOption;
 import nz.co.doltech.gwtjui.core.client.util.Container;
 
@@ -28,12 +29,16 @@ public class Containment implements MultiTypeOption {
         this.selector = selector;
     }
 
+    public Containment(Container container) {
+        this.container = container;
+    }
+
     public Containment(Element element) {
         this.element = element;
     }
 
-    public Containment(Container container) {
-        this.container = container;
+    public Containment(UIObject uiObject) {
+        this(uiObject.getElement());
     }
 
     @Override

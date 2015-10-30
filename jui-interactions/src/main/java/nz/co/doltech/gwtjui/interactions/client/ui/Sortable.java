@@ -55,6 +55,7 @@ import nz.co.doltech.gwtjui.core.client.events.StopEvent;
 import nz.co.doltech.gwtjui.core.client.events.StopHandler;
 import nz.co.doltech.gwtjui.core.client.events.UpdateEvent;
 import nz.co.doltech.gwtjui.core.client.events.UpdateHandler;
+import nz.co.doltech.gwtjui.interactions.client.options.Containment;
 import nz.co.doltech.gwtjui.interactions.client.options.Handle;
 import nz.co.doltech.gwtjui.interactions.client.options.HelpType;
 import nz.co.doltech.gwtjui.interactions.client.options.Helper;
@@ -99,13 +100,20 @@ public class Sortable extends JuiWrapper implements UsesMouseLayer {
 
     private MouseLayer mouseLayer;
 
+    protected Sortable() {}
+
     public Sortable(Element element) {
         super(element);
-        mouseLayer = new MouseLayer(element);
     }
 
     public Sortable(Widget widget) {
         super(widget);
+    }
+
+    @Override
+    public void setWidget(Widget widget) {
+        super.setWidget(widget);
+
         mouseLayer = new MouseLayer(widget);
     }
 
@@ -176,7 +184,7 @@ public class Sortable extends JuiWrapper implements UsesMouseLayer {
         setOption("cancel", connectWith);
     }
 
-    public Element getContainment() {
+    public Object getContainment() {
         return getOption("containment");
     }
 
@@ -189,7 +197,7 @@ public class Sortable extends JuiWrapper implements UsesMouseLayer {
      * container as well or it will have height: 0, causing undefined behavior.
      * @param containment containment {@link Element}.
      */
-    public void setContainment(Element containment) {
+    public void setContainment(Containment containment) {
         setOption("containment", containment);
     }
 

@@ -29,7 +29,6 @@
         <module>jui-core</module>
         <module>jui-interactions</module>
         <module>jui-themes</module>
-        <module>jui-test</module>
     </modules>
 
     <properties>

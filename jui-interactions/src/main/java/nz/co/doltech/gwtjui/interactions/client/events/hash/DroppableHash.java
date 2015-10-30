@@ -65,10 +65,10 @@ public class DroppableHash implements EventHash {
 
     @Override
     public native void fromJavaScriptObject(JavaScriptObject jso) /*-{
-        if(jso.draggable !== null) {
+        if(jso.draggable !== null && jso.draggable !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.DroppableHash::draggable = jso.draggable[0];
         }
-        if(jso.helper !== null) {
+        if(jso.helper !== null && jso.helper !== undefined) {
             this.@nz.co.doltech.gwtjui.interactions.client.events.hash.DroppableHash::helper = jso.helper[0];
         }
         this.@nz.co.doltech.gwtjui.interactions.client.events.hash.DroppableHash::setOffset(Lcom/google/gwt/core/client/JavaScriptObject;)(jso.offset);

@@ -20,15 +20,15 @@ import nz.co.doltech.gwtjui.core.client.js.JsFunction;
 
 public class Revert implements MultiTypeOption {
     private Boolean alwaysRevert;
-    private String useInvalid;
+    private RevertType type;
     private JsFunction jsFunction;
 
     public Revert(Boolean alwaysRevert) {
         this.alwaysRevert = alwaysRevert;
     }
 
-    public Revert(String useInvalid) {
-        this.useInvalid = useInvalid;
+    public Revert(RevertType type) {
+        this.type = type;
     }
 
     public Revert(JsFunction jsFunction) {
@@ -39,8 +39,8 @@ public class Revert implements MultiTypeOption {
     public Object get() {
         if(alwaysRevert != null) {
             return alwaysRevert;
-        } else if(useInvalid != null) {
-            return useInvalid;
+        } else if(type != null) {
+            return type;
         } else {
             return jsFunction;
         }

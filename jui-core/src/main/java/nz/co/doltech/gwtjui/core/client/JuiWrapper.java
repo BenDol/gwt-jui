@@ -15,13 +15,25 @@
  */
 package nz.co.doltech.gwtjui.core.client;
 
+import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.Widget;
 import nz.co.doltech.gwtjui.core.client.base.IsJavaScriptObject;
 import nz.co.doltech.gwtjui.core.client.base.MultiTypeOption;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public abstract class JuiWrapper extends JuiQuery {
+
+    private final static Logger logger = Logger.getLogger(JuiWrapper.class.getName());
+
+    private Map<String, Object> optionFailures = new HashMap<>();
+
+    protected JuiWrapper() {}
 
     public JuiWrapper(Element element) {
         super(element);
@@ -41,16 +53,36 @@ public abstract class JuiWrapper extends JuiQuery {
 
     protected abstract void setOption(Element e, String option, Object value);
 
+    private void setNativeOption(Element e, String option, Object value) {
+        try {
+            setOption(e, option, value);
+        } catch (JavaScriptException ex) {
+            optionFailures.put(option, value);
+        }
+    }
+
+    @Override
     protected void onLoad() {
         initialize();
     }
 
-    protected void onUnload() {
-        remove();
-    }
-
     public void initialize() {
-        initialize(getElement());
+        Element element = getElement();
+        initialize(element);
+
+        Map<String, Object> failures = new HashMap<>();
+        for(Map.Entry<String, Object> entry : optionFailures.entrySet()) {
+            String option = entry.getKey();
+            Object value = entry.getValue();
+            try {
+                setOption(element, option, value);
+                logger.log(Level.FINE, "Successfully set failed option: " + option + " to " + value);
+            } catch (JavaScriptException ex) {
+                failures.put(option, value);
+                logger.log(Level.FINE, "Failed to set wrapper option", ex);
+            }
+        }
+        optionFailures = failures;
     }
 
     public void remove() {
@@ -66,19 +98,26 @@ public abstract class JuiWrapper extends JuiQuery {
     }
 
     protected void setOption(String option, Object value) {
-        setOption(getElement(), option, value);
+        setNativeOption(getElement(), option, value);
     }
 
     protected void setOption(String option, IsJavaScriptObject value) {
-        setOption(getElement(), option, value.asJavaScript());
+        setNativeOption(getElement(), option, value.asJavaScript());
     }
 
     protected void setOption(String option, Style.HasCssName value) {
-        setOption(getElement(), option, value.getCssName());
+        setNativeOption(getElement(), option, value.getCssName());
     }
 
     protected void setOption(String option, MultiTypeOption value) {
-        setOption(getElement(), option, value.get());
+        Object foundType = value.get();
+        if(foundType instanceof Style.HasCssName) {
+            setOption(option, (Style.HasCssName) foundType);
+        } else if(foundType instanceof IsJavaScriptObject) {
+            setOption(option, (IsJavaScriptObject) foundType);
+        } else {
+            setNativeOption(getElement(), option, value.get());
+        }
     }
 
     // Core Methods

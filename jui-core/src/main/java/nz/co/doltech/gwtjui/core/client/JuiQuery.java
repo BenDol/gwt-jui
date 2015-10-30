@@ -18,6 +18,7 @@ package nz.co.doltech.gwtjui.core.client;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import nz.co.doltech.gwtjui.core.client.js.JsArrayUtil;
@@ -27,6 +28,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class JuiQuery extends Wrapper {
+
+    protected JuiQuery() {}
 
     public JuiQuery(Element element) {
         super(element);
@@ -274,10 +277,7 @@ public class JuiQuery extends Wrapper {
         return attr(getElement(), attr);
     }
 
-    /**
-     * Get the value of an attribute for the first element in the set of matched elements.
-     */
-    public native Element attr(Element e, String attr) /*-{
+    protected native Element attr(Element e, String attr) /*-{
         return $wnd.jQuery(e).attr(attr);
     }-*/;
 
@@ -289,10 +289,7 @@ public class JuiQuery extends Wrapper {
         return this;
     }
 
-    /**
-     * Set one or more attributes for the set of matched elements.
-     */
-    public native void attr(Element e, String attr, String value) /*-{
+    protected native void attr(Element e, String attr, String value) /*-{
         $wnd.jQuery(e).attr(attr, value);
     }-*/;
 
@@ -304,10 +301,7 @@ public class JuiQuery extends Wrapper {
         return this;
     }
 
-    /**
-     * Remove an attribute from each element in the set of matched elements.
-     */
-    public native void removeAttr(Element e, String attr) /*-{
+    protected native void removeAttr(Element e, String attr) /*-{
         $wnd.jQuery(e).removeAttr(attr);
     }-*/;
 
@@ -319,10 +313,7 @@ public class JuiQuery extends Wrapper {
         return this;
     }
 
-    /**
-     * Remove a property for the set of matched elements.
-     */
-    public native void removeProp(Element e, String propertyName) /*-{
+    protected native void removeProp(Element e, String propertyName) /*-{
         $wnd.jQuery(e).removeProp(propertyName);
     }-*/;
 
@@ -343,11 +334,59 @@ public class JuiQuery extends Wrapper {
         return this;
     }
 
-    /**
-     * Bind an event handler to the "submit" JavaScript event,
-     * or trigger that event on an element.
-     */
-    public native void submit(Element e, JavaScriptObject jso) /*-{
+    protected native void submit(Element e, JavaScriptObject jso) /*-{
         $wnd.jQuery(e).submit(jso);
+    }-*/;
+
+    /**
+     * Adds the specified class(es) to each element in
+     * the set of matched elements.
+     */
+    public JuiQuery addClass(String className) {
+        addClass(getElement(), className);
+        return this;
+    }
+
+    protected native void addClass(Element e, String className) /*-{
+        $wnd.jQuery(e).addClass(className);
+    }-*/;
+
+    /**
+     * Get the descendants of each element in the current set
+     * of matched elements, filtered by a selector, jQuery
+     * object, or element.
+     */
+    public JuiQuery find(String selector) {
+        return new JuiQuery(find(getElement(), selector));
+    }
+
+    protected native Element find(Element e, String selector) /*-{
+        return $wnd.jQuery(e).find(selector);
+    }-*/;
+
+    /**
+     * Get the descendants of each element in the current set
+     * of matched elements, filtered by a selector, jQuery
+     * object, or element.
+     */
+    public JuiQuery find(Element element) {
+        return new JuiQuery(find(getElement(), element));
+    }
+
+    protected native Element find(Element e, Element element) /*-{
+        return $wnd.jQuery(e).find(element);
+    }-*/;
+
+    /**
+     * Set the HTML contents of each element in the set of matched
+     * elements.
+     */
+    public JuiQuery html(String html) {
+        html(getElement(), html);
+        return this;
+    }
+
+    protected native void html(Element e, String html) /*-{
+        $wnd.jQuery(e).html(html);
     }-*/;
 }
