@@ -6,12 +6,12 @@ You can look at the current [Demo (In Progress)](http://bendol.github.io/gwt-jui
 
 ## Getting Started
 GwtJui is broken down into 6 subprojects to allow you as the developer to choose the JQuery libraries required. The subprojects are as follows:
-* ![completed](http://png.findicons.com/files/icons/1588/farm_fresh_web/16/tick.png) [UI Core](http://api.jqueryui.com/category/ui-core/)
-* ![completed](http://png.findicons.com/files/icons/1588/farm_fresh_web/16/tick.png) [Interactions](http://api.jqueryui.com/category/interactions/)
+* ![completed](https://dl.dropboxusercontent.com/u/49948294/images/tick.png) [UI Core](http://api.jqueryui.com/category/ui-core/)
+* ![completed](https://dl.dropboxusercontent.com/u/49948294/images/tick.png) [Interactions](http://api.jqueryui.com/category/interactions/)
 * ![soon](http://people.mozilla.org/~chowse/drop/amo/personas/assets/review-pending.png) [Widgets](http://api.jqueryui.com/category/widgets/)
 * ![soon](http://people.mozilla.org/~chowse/drop/amo/personas/assets/review-pending.png) [Effects](http://api.jqueryui.com/category/effects/)
 * ![soon](http://people.mozilla.org/~chowse/drop/amo/personas/assets/review-pending.png) [Themes](http://jqueryui.com/themeroller/)
-* ![completed](http://png.findicons.com/files/icons/1588/farm_fresh_web/16/tick.png) [TouchPunch](http://touchpunch.furf.com/)
+* ![completed](https://dl.dropboxusercontent.com/u/49948294/images/tick.png) [TouchPunch](http://touchpunch.furf.com/)
 
 An example using GwtJui is to add the subproject dependecy or dependencies you require.
 ```xml
