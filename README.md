@@ -6,12 +6,12 @@ You can look at the current [Demo (In Progress)](http://bendol.github.io/gwt-jui
 
 ## Getting Started
 GwtJui is broken down into 6 subprojects to allow you as the developer to choose the JQuery libraries required. The subprojects are as follows:
-* ![completed](http://www.mediafire.com/file/gjm2h04hnnxc4ba/tick.png) [UI Core](http://api.jqueryui.com/category/ui-core/)
-* ![completed](http://www.mediafire.com/file/gjm2h04hnnxc4ba/tick.png) [Interactions](http://api.jqueryui.com/category/interactions/)
-* ![soon](http://www.mediafire.com/file/jqmrc6sbr77g7rn/timer.png) [Widgets](http://api.jqueryui.com/category/widgets/)
-* ![soon](http://www.mediafire.com/file/jqmrc6sbr77g7rn/timer.png) [Effects](http://api.jqueryui.com/category/effects/)
-* ![soon](http://www.mediafire.com/file/jqmrc6sbr77g7rn/timer.png) [Themes](http://jqueryui.com/themeroller/)
-* ![completed](http://www.mediafire.com/file/gjm2h04hnnxc4ba/tick.png) [TouchPunch](http://touchpunch.furf.com/)
+* ![completed](http://www.mediafire.com/convkey/a46f/gjm2h04hnnxc4bazg.jpg) [UI Core](http://api.jqueryui.com/category/ui-core/)
+* ![completed](http://www.mediafire.com/convkey/a46f/gjm2h04hnnxc4bazg.jpg) [Interactions](http://api.jqueryui.com/category/interactions/)
+* ![soon](http://www.mediafire.com/convkey/141a/jqmrc6sbr77g7rnzg.jpg) [Widgets](http://api.jqueryui.com/category/widgets/)
+* ![soon](http://www.mediafire.com/convkey/141a/jqmrc6sbr77g7rnzg.jpg) [Effects](http://api.jqueryui.com/category/effects/)
+* ![soon](http://www.mediafire.com/convkey/141a/jqmrc6sbr77g7rnzg.jpg) [Themes](http://jqueryui.com/themeroller/)
+* ![completed](http://www.mediafire.com/convkey/a46f/gjm2h04hnnxc4bazg.jpg) [TouchPunch](http://touchpunch.furf.com/)
 
 An example using GwtJui is to add the subproject dependecy or dependencies you require.
 ```xml
