@@ -18,5 +18,7 @@
   <inherits name="com.google.gwt.resources.Resources"/>
   <inherits name="nz.co.doltech.gwtjui.touchpunch.TouchPunchBase"/>
 
+  <inherits name="nz.co.doltech.gwtjui.interactions.JuiInteractions" />
+
   <entry-point class="nz.co.doltech.gwtjui.touchpunch.client.TouchEntryPoint"/>
 </module>

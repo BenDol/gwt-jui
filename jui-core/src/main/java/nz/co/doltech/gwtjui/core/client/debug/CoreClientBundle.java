@@ -25,6 +25,6 @@ import com.google.gwt.resources.client.TextResource;
 public interface CoreClientBundle extends ClientBundle {
   CoreClientBundle INSTANCE = GWT.create(CoreClientBundle.class);
 
-  @Source("nz/co/doltech/gwtjui/core/client/resources/js/jui-core-1.11.4.cache.js")
+  @Source("nz/co/doltech/gwtjui/core/client/resources/js/jui-core-1.12.1.js")
   TextResource juiCoreDebug();
 }

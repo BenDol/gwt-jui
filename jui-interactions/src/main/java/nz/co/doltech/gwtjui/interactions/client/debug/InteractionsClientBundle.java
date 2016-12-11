@@ -25,6 +25,6 @@ import com.google.gwt.resources.client.TextResource;
 public interface InteractionsClientBundle extends ClientBundle {
     InteractionsClientBundle INSTANCE = GWT.create(InteractionsClientBundle.class);
 
-    @Source("nz/co/doltech/gwtjui/interactions/client/resources/js/jui-interactions-1.11.4.cache.js")
+    @Source("nz/co/doltech/gwtjui/interactions/client/resources/js/jui-interactions-1.12.1.js")
     TextResource juiInteractionsDebug();
 }

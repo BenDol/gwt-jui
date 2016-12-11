@@ -181,7 +181,7 @@ public class Sortable extends JuiWrapper implements UsesMouseLayer {
      * @param connectWith selector text.
      */
     public void setConnectWith(String connectWith) {
-        setOption("cancel", connectWith);
+        setOption("connectWith", connectWith);
     }
 
     public Object getContainment() {

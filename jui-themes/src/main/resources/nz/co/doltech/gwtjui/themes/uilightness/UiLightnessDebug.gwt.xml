@@ -19,9 +19,11 @@
   <inherits name="com.google.gwt.resources.Resources"/>
 
   <public path="">
-    <include name="css/*.debug.cache.css"/>
-    <include name="images/*"/>
+    <include name="css/*.css"/>
+    <exclude name="css/*.min.css"/>
+    <include name="css/images/*"/>
   </public>
 
-  <stylesheet src="css/theme-1.11.4.debug.cache.css"/>
+  <stylesheet src="css/jquery-ui-1.12.1.css"/>
+  <stylesheet src="css/theme-1.12.1.css"/>
 </module>

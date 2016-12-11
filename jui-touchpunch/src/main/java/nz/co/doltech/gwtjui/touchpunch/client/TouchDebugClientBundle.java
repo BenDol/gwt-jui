@@ -13,12 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package nz.co.doltech.gwtjui.touchpunch.client.debug;
+package nz.co.doltech.gwtjui.touchpunch.client;
 
-public class TouchEntryPoint extends nz.co.doltech.gwtjui.touchpunch.client.TouchEntryPoint {
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.TextResource;
 
-    @Override
-    public void load() {
-        inject(TouchClientBundle.INSTANCE.touchPunchDebug(), false, true);
-    }
+/**
+ * @author Ben Dol
+ */
+public interface TouchDebugClientBundle extends ClientBundle {
+  TouchDebugClientBundle INSTANCE = GWT.create(TouchDebugClientBundle.class);
+
+  @Source("nz/co/doltech/gwtjui/touchpunch/client/resources/js/jui-touchpunch.js")
+  TextResource touchPunchDebug();
 }

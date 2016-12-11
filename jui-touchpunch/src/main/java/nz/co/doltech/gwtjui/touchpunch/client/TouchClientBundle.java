@@ -25,6 +25,6 @@ import com.google.gwt.resources.client.TextResource;
 public interface TouchClientBundle extends ClientBundle {
   TouchClientBundle INSTANCE = GWT.create(TouchClientBundle.class);
 
-  @Source("resources/js/jui-touchpunch.min.cache.js")
+  @Source("nz/co/doltech/gwtjui/touchpunch/client/resources/js/jui-touchpunch.min.js")
   TextResource touchPunch();
 }

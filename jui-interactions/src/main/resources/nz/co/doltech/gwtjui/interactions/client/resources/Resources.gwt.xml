@@ -26,9 +26,9 @@
     <exclude name="**/*.html"/>
     <exclude name="**/*.htm"/>
     <exclude name="**/*.xml"/>
-    <exclude name="**/*.debug.cache.*"/>
+    <include name="**/*.min.*"/>
   </public>
 
-  <stylesheet src="css/jui-interactions-1.11.4.min.cache.css"/>
-  <stylesheet src="css/jui-interactions-structure-1.11.4.min.cache.css"/>
+  <stylesheet src="css/jui-interactions-1.12.1.min.css"/>
+  <stylesheet src="css/jui-interactions-structure-1.12.1.min.css"/>
 </module>

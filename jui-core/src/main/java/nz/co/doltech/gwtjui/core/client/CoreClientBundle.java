@@ -25,6 +25,6 @@ import com.google.gwt.resources.client.TextResource;
 public interface CoreClientBundle extends ClientBundle {
   CoreClientBundle INSTANCE = GWT.create(CoreClientBundle.class);
 
-  @Source("resources/js/jui-core-1.11.4.min.cache.js")
+  @Source("resources/js/jui-core-1.12.1.min.js")
   TextResource juiCore();
 }

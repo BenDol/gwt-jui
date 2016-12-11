@@ -25,6 +25,6 @@ import com.google.gwt.resources.client.TextResource;
 public interface WithJQueryClientBundle extends ClientBundle {
   WithJQueryClientBundle INSTANCE = GWT.create(WithJQueryClientBundle.class);
 
-  @Source("nz/co/doltech/gwtjui/core/client/resources/js/jquery-1.11.3.cache.js")
+  @Source("nz/co/doltech/gwtjui/core/client/resources/js/jquery-1.12.1.js")
   TextResource jqueryDebug();
 }

@@ -25,9 +25,6 @@
     <exclude name="**/*.htm"/>
     <exclude name="**/*.xml"/>
     <exclude name="**/*.js"/>
-    <exclude name="**/*min.cache.*"/>
+    <exclude name="**/*.min.*"/>
   </public>
-
-  <stylesheet src="css/jui-core-1.11.4.debug.cache.css"/>
-  <stylesheet src="css/jui-core-structure.1.11.4.debug.cache.css"/>
 </module>
