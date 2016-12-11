@@ -16,6 +16,7 @@
 package nz.co.doltech.gwtjui.core.client.util;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import nz.co.doltech.gwtjui.core.client.js.Js;
 
 /**
  * @author Ben Dol
@@ -51,16 +52,16 @@ public class At extends JavaScriptObject {
 
     protected static At createAt(double left, double right, double top, double bottom) {
         At at = JavaScriptObject.createObject().cast();
-        if(!new Double(left).isNaN()) {
+        if(!Js.isUndefinedOrNull(left)) {
             at.setLeft(left);
         }
-        if(!new Double(right).isNaN()) {
+        if(!Js.isUndefinedOrNull(right)) {
             at.setRight(right);
         }
-        if(!new Double(top).isNaN()) {
+        if(!Js.isUndefinedOrNull(top)) {
             at.setTop(top);
         }
-        if(!new Double(bottom).isNaN()) {
+        if(!Js.isUndefinedOrNull(bottom)) {
             at.setBottom(bottom);
         }
         return at;
